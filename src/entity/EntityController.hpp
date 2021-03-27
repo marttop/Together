@@ -12,6 +12,7 @@
 #include "Player.hpp"
 #include "Parallax.hpp"
 #include <memory>
+#include <ctime>
 
 using namespace std;
 
@@ -28,8 +29,13 @@ class EntityController {
         void addAsteroid(sf::Vector2f pos);
         void drawAll(sf::RenderWindow *w) const;
         void updateAll();
+        void createRandomAsteroids();
+        void destroyAsteroids();
+        void updateAsteroids();
+
     protected:
     private:
+        sf::Clock _asteroidClock;
         vector <Asteroid *> _asteroid;
         vector <sf::Texture *> _textures;
         Player *_player;

@@ -23,6 +23,7 @@ class Entity {
         sf::Vector2f getSize() const;
         void setPos(sf::Vector2f pos);
         void restartClock();
+        void setRotation(float angle);
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;

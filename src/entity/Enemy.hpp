@@ -12,10 +12,11 @@
 
 class Enemy : public Entity {
     public:
-        Enemy(sf::Texture *texture, sf::Vector2f pos);
+        Enemy(sf::Texture *texture, sf::Vector2f pos, float speed = 0);
         ~Enemy();
 
     protected:
+        float _speed;
     private:
 };
 

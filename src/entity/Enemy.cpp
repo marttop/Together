@@ -7,8 +7,9 @@
 
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Texture *texture, sf::Vector2f pos) : Entity(texture, pos)
+Enemy::Enemy(sf::Texture *texture, sf::Vector2f pos, float speed) : Entity(texture, pos)
 {
+    _speed = speed;
 }
 
 Enemy::~Enemy()

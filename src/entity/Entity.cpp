@@ -47,6 +47,11 @@ void Entity::setPos(sf::Vector2f pos)
     _sprite->setPosition(_pos);
 }
 
+void Entity::setRotation(float angle)
+{
+    _sprite->rotate(angle);
+}
+
 Entity::~Entity()
 {
     if (_sprite)
