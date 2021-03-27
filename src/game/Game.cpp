@@ -43,7 +43,7 @@ void Game::display()
 
 void Game::run()
 {
-    // box.readMessage("src/game/dialog");
+    // box.readMessage("res/dialog");
     while (_window.isOpen()) {
         handleEvents();
         clear();

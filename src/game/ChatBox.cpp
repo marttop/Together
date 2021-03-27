@@ -12,14 +12,14 @@ ChatBox::ChatBox()
     _font.loadFromFile("src/fonts/RetroGaming.ttf");
     sf::Text tmp;
     tmp.setFont(_font);
-    tmp.setColor(sf::Color::White);
+    tmp.setFillColor(sf::Color::White);
     tmp.setCharacterSize(20);
     _texture.loadFromFile("assets/sheldon.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(sf::Vector2f{40, 890});
     for (size_t i = 0; i < 5; i++) {
         _dialog.push_back(tmp);
-        _dialog[i].setPosition(sf::Vector2f{200, 890 + (i * 30)});
+        _dialog[i].setPosition(sf::Vector2f{200, 890 + ((float)i * 30)});
     }
     std::string str("");
     for (size_t i = 0; i < 5; i++) {
