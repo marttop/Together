@@ -11,18 +11,17 @@ Entity::Entity(sf::Texture *texture, sf::Vector2f pos)
 {
     _texture = texture;
     _pos = pos;
-    _sprite = new sf::Sprite(*this->_texture);
+    _sprite = new sf::Sprite(*_texture);
+    _sprite->setPosition(pos);
 }
 
 sf::Sprite &Entity::getSprite() const
 {
-    return (*this->_sprite);
+    return (*_sprite);
 }
 
 Entity::~Entity()
 {
-    if (_texture)
-        delete _texture;
     if (_sprite)
         delete _sprite;
 }

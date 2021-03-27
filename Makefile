@@ -5,26 +5,31 @@
 ## Makefile
 ##
 
-NAME	=	test
+NAME			=	Together
 
-CXX	=	g++
+CXX				=	g++
 
-DIR1         =     ./src/entity/
-DIR2         =     ./src/game/
-INC            =    $(DIR1) $(DIR2)
-INC_PARAMS    =    $(foreach d, $(INC), -I$d)
+DIR1			=     ./src/entity/
+DIR2			=     ./src/game/
+INC				=    $(DIR1) $(DIR2)
+INC_PARAMS		=    $(foreach d, $(INC), -I$d)
 
-CXXFLAGS	=	-Wall -Wextra $(INC_PARAMS)
+CXXFLAGS		=	-Wall -Wextra $(INC_PARAMS)
 
-LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS			=	-lsfml-graphics -lsfml-window -lsfml-system
 
-SRC	=	src/main.cpp \
-		src/game/Game.cpp \
-		src/entity/Entity.cpp \
+SRC				=	src/main.cpp \
+					src/game/Game.cpp \
+					src/entity/Entity.cpp \
+					src/entity/EntityController.cpp \
+					src/entity/Enemy.cpp \
+					src/entity/Asteroid.cpp \
+					src/entity/Ships.cpp \
+					src/entity/Player.cpp \
 
-OBJ	=	$(SRC:.cpp=.o)
+OBJ				=	$(SRC:.cpp=.o)
 
-RM	=	rm -rf
+RM				=	rm -rf
 
 all: $(NAME)
 

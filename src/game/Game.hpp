@@ -21,11 +21,14 @@ class Game {
     public:
         Game(const std::string &winTitle, size_t width, size_t height);
         ~Game();
+
+        void run();
+
+    private:
         void handleEvents();
         void clear();
         void display();
-        void run();
-    private:
+
         sf::RenderWindow _window;
         sf::Event _event;
         EntityController _controller;

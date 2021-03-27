@@ -9,6 +9,7 @@
 #define ENTITYCONTROLLER_HPP_
 
 #include "Asteroid.hpp"
+#include "Player.hpp"
 #include <memory>
 
 using namespace std;
@@ -23,12 +24,13 @@ class EntityController {
             ASTEROID,
         };
 
-        void createAsteroid();
+        void addAsteroid(sf::Vector2f pos);
         void drawAll(sf::RenderWindow *w) const;
     protected:
     private:
-        vector<shared_ptr<Asteroid>> _asteroid;
-        vector<shared_ptr<sf::Texture>> _textures;
+        vector <Asteroid *> _asteroid;
+        vector <sf::Texture *> _textures;
+        Player *_player;
 };
 
 #endif /* !ENTITYCONTROLLER_HPP_ */

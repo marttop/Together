@@ -29,16 +29,17 @@ void Game::clear()
     _window.clear(sf::Color::Black);
 }
 
-void Game::run()
-{
-    while (this->_window.isOpen()) {
-        this->handleEvents();
-        this->clear();
-        this->display();
-    }
-}
-
 void Game::display()
 {
     _window.display();
+}
+
+void Game::run()
+{
+    while (_window.isOpen()) {
+        handleEvents();
+        clear();
+        _controller.drawAll(&_window);
+        display();
+    }
 }
