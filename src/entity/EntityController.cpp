@@ -66,7 +66,7 @@ void EntityController::updateAsteroids()
 
 void EntityController::destroyAsteroids()
 {
-    for (int i = 0; i < _asteroid.size(); i++) {
+    for (size_t i = 0; i < _asteroid.size(); i++) {
         if (_asteroid[i]->getPos().y >= 1250) {
             _asteroid.erase(_asteroid.begin() + i);
         }
