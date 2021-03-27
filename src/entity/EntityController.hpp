@@ -40,6 +40,7 @@ class EntityController {
         vector <sf::Texture *> _textures;
         Player *_player;
         Parallax *_parallax;
+        float _randTime;
 };
 
 #endif /* !ENTITYCONTROLLER_HPP_ */
