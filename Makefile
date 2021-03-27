@@ -24,7 +24,7 @@ SRC				=	src/main.cpp \
 					src/entity/EntityController.cpp \
 					src/entity/Enemy.cpp \
 					src/entity/Asteroid.cpp \
-					src/entity/Ships.cpp \
+					src/entity/Ship.cpp \
 					src/entity/Player.cpp \
 					src/entity/Parallax.cpp \
 					src/entity/Layer.cpp \

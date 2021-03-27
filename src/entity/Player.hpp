@@ -8,19 +8,20 @@
 #ifndef PLAYER_HPP_
 #define PLAYER_HPP_
 
-#include "Ships.hpp"
+#include "Ship.hpp"
 
 class Player {
     public:
         Player();
         ~Player();
         sf::Sprite &getSprite(int i) const;
+        void drawPlayer(sf::RenderWindow *w);
 
     protected:
     private:
-        sf::Texture _shipTextures[2];
-        Ships *_ship1;
-        Ships *_ship2;
+        sf::Texture _shipTextures;
+        Ship *_ship1;
+        Ship *_ship2;
 };
 
 #endif /* !PLAYER_HPP_ */
