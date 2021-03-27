@@ -10,6 +10,7 @@
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
     _window.create(sf::VideoMode(width, height), winTitle);
+    _window.setFramerateLimit(60);
 }
 
 Game::~Game()

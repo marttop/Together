@@ -12,11 +12,15 @@
 
 class Asteroid : public Enemy {
     public:
-        Asteroid(sf::Texture *texture, sf::Vector2f pos);
+        Asteroid(sf::Texture *texture, sf::Vector2f pos, float speed);
         ~Asteroid();
 
+        void moveAsteroid();
+        void rotateAsteroid();
     protected:
     private:
+        sf::Clock _rotationClock;
+        float _rotationSpeed;
 };
 
 #endif /* !ASTEROID_HPP_ */

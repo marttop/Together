@@ -13,6 +13,8 @@ EntityController::EntityController()
     _textures[ASTEROID]->loadFromFile("assets/asteroid1.png");
     _player = new Player;
     _parallax = new Parallax;
+    _asteroidClock.restart();
+    srand(time(NULL));
 }
 
 EntityController::~EntityController()
@@ -29,15 +31,44 @@ void EntityController::drawAll(sf::RenderWindow *w) const
     for (auto a : _asteroid)
         w->draw(a->getSprite());
     //w->draw(_player->getSprite(2));
-    w->draw(_player->getSprite(1));
+    // w->draw(_player->getSprite(1));
 }
 
 void EntityController::updateAll()
 {
     _parallax->moveLayers();
+    updateAsteroids();
 }
 
 void EntityController::addAsteroid(sf::Vector2f pos)
 {
-    _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos));
+    _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos, 2 + (rand() % 5)));
+}
+
+void EntityController::createRandomAsteroids()
+{
+    if (_asteroidClock.getElapsedTime().asSeconds() > 0.5) {
+        float x = rand() % 1920;
+        addAsteroid(sf::Vector2f{x, -500});
+        _asteroidClock.restart();
+    }
+}
+
+void EntityController::updateAsteroids()
+{
+    createRandomAsteroids();
+    for (auto itr : _asteroid) {
+        itr->moveAsteroid();
+        itr->rotateAsteroid();
+    }
+    destroyAsteroids();
+}
+
+void EntityController::destroyAsteroids()
+{
+    for (int i = 0; i < _asteroid.size(); i++) {
+        if (_asteroid[i]->getPos().y >= 1250) {
+            _asteroid.erase(_asteroid.begin() + i);
+        }
+    }
 }
