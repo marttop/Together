@@ -9,8 +9,10 @@
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
+    _scene = MENU;
     _window.create(sf::VideoMode(width, height), winTitle);
     _window.setFramerateLimit(60);
+    _language = ".en";
 }
 
 Game::~Game()
@@ -40,8 +42,14 @@ void Game::run()
     while (_window.isOpen()) {
         handleEvents();
         clear();
-        _controller.updateAll();
-        _controller.drawAll(&_window);
+        if (_scene == GAME) {
+            _controller.updateAll();
+            _controller.drawAll(&_window);
+        }
+        else if (_scene == MENU) {
+            _menu.displayMenu(&_window);
+            _menu.menuAnimation();
+        }
         display();
     }
 }

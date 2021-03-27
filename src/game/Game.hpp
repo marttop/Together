@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include "EntityController.hpp"
+#include "Menu.hpp"
 
 using namespace std;
 
@@ -24,6 +25,10 @@ class Game {
 
         void run();
 
+        enum Scene {
+            MENU,
+            GAME
+        };
     private:
         void handleEvents();
         void clear();
@@ -32,6 +37,9 @@ class Game {
         sf::RenderWindow _window;
         sf::Event _event;
         EntityController _controller;
+        Menu _menu;
+        Scene _scene;
+        string _language;
 };
 
 #endif /* !GAME_HPP_ */
