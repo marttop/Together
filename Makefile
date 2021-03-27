@@ -20,6 +20,7 @@ LDFLAGS			=	-lsfml-graphics -lsfml-window -lsfml-system
 
 SRC				=	src/main.cpp \
 					src/game/Game.cpp \
+					src/game/ChatBox.cpp \
 					src/entity/Entity.cpp \
 					src/entity/EntityController.cpp \
 					src/entity/Enemy.cpp \

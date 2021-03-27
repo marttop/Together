@@ -22,6 +22,10 @@ void Game::handleEvents()
     while (_window.pollEvent(_event)) {
         if (_event.type == sf::Event::Closed)
             _window.close();
+        if (_event.type == sf::Event::KeyPressed) {
+            if (_event.key.code == sf::Keyboard::Enter)
+                box.addLine();
+        }
     }
 }
 
@@ -37,11 +41,14 @@ void Game::display()
 
 void Game::run()
 {
+    box.readMessage("src/game/dialog");
     while (_window.isOpen()) {
         handleEvents();
         clear();
         _controller.updateAll();
         _controller.drawAll(&_window);
+        box.setDialog();
+        box.draw(&_window);
         display();
     }
 }

@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include "EntityController.hpp"
+#include "ChatBox.hpp"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ class Game {
         sf::RenderWindow _window;
         sf::Event _event;
         EntityController _controller;
+        ChatBox box;
 };
 
 #endif /* !GAME_HPP_ */
