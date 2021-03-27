@@ -12,6 +12,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+#include "Particles.hpp"
+
+class ParticleSystem;
+
 class Entity {
     public:
         Entity(sf::Texture *texture, sf::Vector2f pos);
@@ -29,6 +33,7 @@ class Entity {
         sf::Sprite *_sprite;
         sf::Vector2f _pos;
         sf::Clock _clock;
+        ParticleSystem *_particleSystem;
     private:
 };
 

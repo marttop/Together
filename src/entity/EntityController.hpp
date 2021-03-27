@@ -19,7 +19,7 @@ using namespace std;
 
 class EntityController {
     public:
-        EntityController();
+        EntityController(Player *player);
         ~EntityController();
 
         enum Textures {

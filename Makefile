@@ -16,10 +16,11 @@ INC_PARAMS		=    $(foreach d, $(INC), -I$d)
 
 CXXFLAGS		=	-Wall -Wextra $(INC_PARAMS)
 
-LDFLAGS			=	-lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS			=	-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lGL
 
 SRC				=	src/main.cpp \
 					src/game/Game.cpp \
+					src/game/Utils.cpp \
 					src/entity/Entity.cpp \
 					src/entity/EntityController.cpp \
 					src/entity/Enemy.cpp \
@@ -28,6 +29,7 @@ SRC				=	src/main.cpp \
 					src/entity/Player.cpp \
 					src/entity/Parallax.cpp \
 					src/entity/Layer.cpp \
+					src/entity/Particles.cpp \
 
 OBJ				=	$(SRC:.cpp=.o)
 

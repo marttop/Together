@@ -11,9 +11,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
 #include <string>
 #include <vector>
 #include "EntityController.hpp"
+#include <math.h>
+#include "Utils.hpp"
 
 using namespace std;
 
@@ -31,7 +34,8 @@ class Game {
 
         sf::RenderWindow _window;
         sf::Event _event;
-        EntityController _controller;
+        EntityController *_controller;
+        Player *_player;
 };
 
 #endif /* !GAME_HPP_ */

@@ -14,6 +14,7 @@ Entity::Entity(sf::Texture *texture, sf::Vector2f pos)
     _sprite = new sf::Sprite(*_texture);
     _sprite->setPosition(pos);
     _clock.restart();
+    _particleSystem = nullptr;
 }
 
 sf::Sprite &Entity::getSprite() const
