@@ -44,7 +44,7 @@ void Button::setColor(sf::Color color)
 {
     _alpha = color.a;
     this->_sprite->setColor(color);
-    this->_btnText.setFillColor(color);
+    this->_btnText.setFillColor(sf::Color{255, 255, 255, color.a});
 }
 
 void Button::btnHover(sf::RenderWindow *w)

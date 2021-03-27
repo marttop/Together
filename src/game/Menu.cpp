@@ -36,6 +36,8 @@ void Menu::menuAnimation()
             this->_clock.restart();
 
             for (auto itr : _buttons) {
+                color = itr->getColor();
+                color.a += 5;
                 itr->setColor(color);
             }
         }
