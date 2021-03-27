@@ -16,6 +16,9 @@ class Player {
         ~Player();
         sf::Sprite &getSprite(int i) const;
         void drawPlayer(sf::RenderWindow *w);
+        void update();
+        void setShipMove(sf::Keyboard::Key key);
+        void unsetShipMove(sf::Keyboard::Key key);
 
     protected:
     private:

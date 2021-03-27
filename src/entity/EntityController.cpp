@@ -7,14 +7,14 @@
 
 #include "EntityController.hpp"
 
-EntityController::EntityController()
+EntityController::EntityController(Player *player)
 {
+    srand(time(NULL));
     _textures.push_back(new sf::Texture);
     _textures[ASTEROID]->loadFromFile("assets/asteroid1.png");
-    _player = new Player;
+    _player = player;
     _parallax = new Parallax;
     _asteroidClock.restart();
-    srand(time(NULL));
     _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
 }
 
@@ -37,6 +37,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 void EntityController::updateAll()
 {
     _parallax->moveLayers();
+    _player->update();
     updateAsteroids();
 }
 

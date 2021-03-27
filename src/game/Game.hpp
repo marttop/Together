@@ -11,9 +11,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
 #include <string>
 #include <vector>
+#include <math.h>
 #include "EntityController.hpp"
+#include "Utils.hpp"
 #include "Menu.hpp"
 #include "ChatBox.hpp"
 
@@ -37,7 +40,8 @@ class Game {
 
         sf::RenderWindow _window;
         sf::Event _event;
-        EntityController _controller;
+        EntityController *_controller;
+        Player *_player;
         Menu _menu;
         Scene _scene;
         string _language;
