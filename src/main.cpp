@@ -11,7 +11,7 @@
 int main()
 {
     try {
-        Game game("SFML", 800, 600);
+        Game game("Together", 1920, 1080);
         game.run();
     }
     catch(const std::exception& e) {

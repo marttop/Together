@@ -13,11 +13,38 @@ Entity::Entity(sf::Texture *texture, sf::Vector2f pos)
     _pos = pos;
     _sprite = new sf::Sprite(*_texture);
     _sprite->setPosition(pos);
+    _clock.restart();
 }
 
 sf::Sprite &Entity::getSprite() const
 {
     return (*_sprite);
+}
+
+float Entity::getElapsedTime() const
+{
+    return (_clock.getElapsedTime().asSeconds());
+}
+
+void Entity::restartClock()
+{
+    _clock.restart();
+}
+
+sf::Vector2f Entity::getPos() const
+{
+    return (_pos);
+}
+
+sf::Vector2f Entity::getSize() const
+{
+    return (sf::Vector2f{_sprite->getGlobalBounds().width, _sprite->getGlobalBounds().height});
+}
+
+void Entity::setPos(sf::Vector2f pos)
+{
+    _pos = pos;
+    _sprite->setPosition(_pos);
 }
 
 Entity::~Entity()

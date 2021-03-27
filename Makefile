@@ -26,6 +26,8 @@ SRC				=	src/main.cpp \
 					src/entity/Asteroid.cpp \
 					src/entity/Ships.cpp \
 					src/entity/Player.cpp \
+					src/entity/Parallax.cpp \
+					src/entity/Layer.cpp \
 
 OBJ				=	$(SRC:.cpp=.o)
 

@@ -39,6 +39,7 @@ void Game::run()
     while (_window.isOpen()) {
         handleEvents();
         clear();
+        _controller.updateAll();
         _controller.drawAll(&_window);
         display();
     }

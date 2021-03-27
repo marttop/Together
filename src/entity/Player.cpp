@@ -10,9 +10,9 @@
 Player::Player()
 {
     _shipTextures[0].loadFromFile("assets/asteroid1.png");
-    _shipTextures[1].loadFromFile("assets/asteroid1.png");
+    //_shipTextures[1].loadFromFile("assets/nebula_aqua_pink.png");
     _ship1 = new Ships(&_shipTextures[0], sf::Vector2f{0, 0});
-    _ship2 = new Ships(&_shipTextures[1], sf::Vector2f{150, 150});
+    //_ship2 = new Ships(&_shipTextures[1], sf::Vector2f{0, 0});
 }
 
 Player::~Player()

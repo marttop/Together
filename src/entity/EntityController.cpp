@@ -12,6 +12,7 @@ EntityController::EntityController()
     _textures.push_back(new sf::Texture);
     _textures[ASTEROID]->loadFromFile("assets/asteroid1.png");
     _player = new Player;
+    _parallax = new Parallax;
 }
 
 EntityController::~EntityController()
@@ -24,10 +25,16 @@ EntityController::~EntityController()
 
 void EntityController::drawAll(sf::RenderWindow *w) const
 {
+    _parallax->drawLayers(w);
     for (auto a : _asteroid)
         w->draw(a->getSprite());
+    //w->draw(_player->getSprite(2));
     w->draw(_player->getSprite(1));
-    w->draw(_player->getSprite(2));
+}
+
+void EntityController::updateAll()
+{
+    _parallax->moveLayers();
 }
 
 void EntityController::addAsteroid(sf::Vector2f pos)

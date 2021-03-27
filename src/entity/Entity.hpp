@@ -18,10 +18,16 @@ class Entity {
         ~Entity();
 
         sf::Sprite &getSprite() const;
+        float getElapsedTime() const;
+        sf::Vector2f getPos() const;
+        sf::Vector2f getSize() const;
+        void setPos(sf::Vector2f pos);
+        void restartClock();
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;
         sf::Vector2f _pos;
+        sf::Clock _clock;
     private:
 };
 
