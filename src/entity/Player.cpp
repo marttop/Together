@@ -9,10 +9,11 @@
 
 Player::Player()
 {
-    // _shipTextures[0].loadFromFile("assets/asteroid1.png");
-    //_shipTextures[1].loadFromFile("assets/nebula_aqua_pink.png");
-    // _ship1 = new Ships(&_shipTextures[0], sf::Vector2f{0, 0});
-    //_ship2 = new Ships(&_shipTextures[1], sf::Vector2f{0, 0});
+    _shipTextures.loadFromFile("assets/player_ship.png");
+    _ship1 = new Ship(&_shipTextures, sf::Vector2f{1920 / 3 - ((float)_shipTextures.getSize().x / 3 / 2), (1080 / 8) * 6},
+                        sf::IntRect{(int)_shipTextures.getSize().x / 3, 0, (int)_shipTextures.getSize().x / 3, (int)_shipTextures.getSize().y});
+    _ship2 = new Ship(&_shipTextures, sf::Vector2f{(1920 / 3 - ((float)_shipTextures.getSize().x / 3 / 2)) * 2, (1080 / 8) * 6},
+                        sf::IntRect{(int)_shipTextures.getSize().x / 3, 0, (int)_shipTextures.getSize().x / 3, (int)_shipTextures.getSize().y});
 }
 
 Player::~Player()
@@ -25,4 +26,10 @@ sf::Sprite &Player::getSprite(int i) const
 {
     if (i == 1) return (_ship1->getSprite());
     else return (_ship2->getSprite());
+}
+
+void Player::drawPlayer(sf::RenderWindow *w)
+{
+    w->draw(_ship1->getSprite());
+    w->draw(_ship2->getSprite());
 }

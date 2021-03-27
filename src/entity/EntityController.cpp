@@ -15,6 +15,7 @@ EntityController::EntityController()
     _parallax = new Parallax;
     _asteroidClock.restart();
     srand(time(NULL));
+    _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
 }
 
 EntityController::~EntityController()
@@ -30,8 +31,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
     _parallax->drawLayers(w);
     for (auto a : _asteroid)
         w->draw(a->getSprite());
-    //w->draw(_player->getSprite(2));
-    // w->draw(_player->getSprite(1));
+    _player->drawPlayer(w);
 }
 
 void EntityController::updateAll()
@@ -42,15 +42,16 @@ void EntityController::updateAll()
 
 void EntityController::addAsteroid(sf::Vector2f pos)
 {
-    _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos, 2 + (rand() % 5)));
+    _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos, 2 + (rand() % 6)));
 }
 
 void EntityController::createRandomAsteroids()
 {
-    if (_asteroidClock.getElapsedTime().asSeconds() > 0.5) {
+    if (_asteroidClock.getElapsedTime().asSeconds() > _randTime) {
         float x = rand() % 1920;
         addAsteroid(sf::Vector2f{x, -500});
         _asteroidClock.restart();
+        _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
     }
 }
 

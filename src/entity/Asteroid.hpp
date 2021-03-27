@@ -17,8 +17,10 @@ class Asteroid : public Enemy {
 
         void moveAsteroid();
         void rotateAsteroid();
+        void scaleAsteroid();
     protected:
     private:
+        int _direction;
         sf::Clock _rotationClock;
         float _rotationSpeed;
 };
