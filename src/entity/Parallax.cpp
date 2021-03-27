@@ -13,11 +13,16 @@ Parallax::Parallax()
     _layerTextures[NEBULA_BLUE].loadFromFile("assets/nebula_blue.png");
     _layerTextures[NEBULA_RED].loadFromFile("assets/nebula_red.png");
     _layerTextures[SMALL_STARS1].loadFromFile("assets/small_stars1.png");
+    _layerTextures[SMALL_STARS2].loadFromFile("assets/small_stars2.png");
     _layerTextures[BIG_STARS1].loadFromFile("assets/big_stars1.png");
+    _layerTextures[BIG_STARS2].loadFromFile("assets/big_stars2.png");
     addLayer(1.0, NEBULA_AQUA_PINK, false);
     addLayer(1.0, NEBULA_BLUE, true);
-    addLayer(2.0, BIG_STARS1, true);
-    addLayer(3.0, SMALL_STARS1, true);
+    addLayer(1.0, NEBULA_RED, false);
+    addLayer(2.0, BIG_STARS1, false);
+    addLayer(2.0, SMALL_STARS1, true);
+    addLayer(3.0, BIG_STARS2, true);
+    addLayer(3.0, SMALL_STARS2, true);
 }
 
 Parallax::~Parallax()
