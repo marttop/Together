@@ -16,6 +16,8 @@ class Layer : public Entity {
         ~Layer();
 
         void setActive(bool activation);
+        void setColor(sf::Color color);
+        sf::Color getColor() const;
         bool isActive() const;
 
     protected:

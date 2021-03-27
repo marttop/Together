@@ -14,9 +14,11 @@
 #include <SFML/OpenGL.hpp>
 #include <string>
 #include <vector>
-#include "EntityController.hpp"
 #include <math.h>
+#include "EntityController.hpp"
 #include "Utils.hpp"
+#include "Menu.hpp"
+#include "ChatBox.hpp"
 
 using namespace std;
 
@@ -27,6 +29,10 @@ class Game {
 
         void run();
 
+        enum Scene {
+            MENU,
+            GAME
+        };
     private:
         void handleEvents();
         void clear();
@@ -36,6 +42,10 @@ class Game {
         sf::Event _event;
         EntityController *_controller;
         Player *_player;
+        Menu _menu;
+        Scene _scene;
+        string _language;
+        ChatBox box;
 };
 
 #endif /* !GAME_HPP_ */

@@ -16,6 +16,16 @@ Layer::~Layer()
 {
 }
 
+void Layer::setColor(sf::Color color)
+{
+    _sprite->setColor(color);
+}
+
+sf::Color Layer::getColor() const
+{
+    return (_sprite->getColor());
+}
+
 void Layer::setActive(bool activation)
 {
     _isActive = activation;
