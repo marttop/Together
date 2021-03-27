@@ -46,7 +46,7 @@ void ChatBox::setLanguage(std::string language)
 
 void ChatBox::loadSprite(const std::string &texturePath)
 {
-    _texture.loadFromFile("assets/sheldon.png");
+    _texture.loadFromFile(texturePath);
     _sprite.setTexture(_texture);
     _sprite.setPosition(sf::Vector2f{40, 890});
 }
