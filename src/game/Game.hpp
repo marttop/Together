@@ -12,6 +12,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <string>
+#include <vector>
+#include "EntityController.hpp"
+
+using namespace std;
 
 class Game {
     public:
@@ -20,9 +24,11 @@ class Game {
         void handleEvents();
         void clear();
         void display();
+        void run();
     private:
-        sf::RenderWindow window;
-        sf::Event event;
+        sf::RenderWindow _window;
+        sf::Event _event;
+        EntityController _controller;
 };
 
 #endif /* !GAME_HPP_ */

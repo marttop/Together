@@ -9,12 +9,18 @@ NAME	=	test
 
 CXX	=	g++
 
-CXXFLAGS	=	-Wall -Wextra -I./
+DIR1         =     ./src/entity/
+DIR2         =     ./src/game/
+INC            =    $(DIR1) $(DIR2)
+INC_PARAMS    =    $(foreach d, $(INC), -I$d)
+
+CXXFLAGS	=	-Wall -Wextra $(INC_PARAMS)
 
 LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system
 
-SRC	=	main.cpp \
-		Game.cpp \
+SRC	=	src/main.cpp \
+		src/game/Game.cpp \
+		src/entity/Entity.cpp \
 
 OBJ	=	$(SRC:.cpp=.o)
 

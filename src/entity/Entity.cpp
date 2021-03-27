@@ -14,6 +14,11 @@ Entity::Entity(sf::Texture *texture, sf::Vector2f pos)
     _sprite = new sf::Sprite(*this->_texture);
 }
 
+sf::Sprite &Entity::getSprite() const
+{
+    return (*this->_sprite);
+}
+
 Entity::~Entity()
 {
     if (_texture)
