@@ -49,9 +49,8 @@ void Button::setColor(sf::Color color)
 
 void Button::btnHover(sf::RenderWindow *w)
 {
-    sf::Vector2i pos = sf::Mouse::getPosition(*w);
-    if (_sprite->getGlobalBounds().contains(sf::Vector2f(pos))) {
-        this->_sprite->setColor(sf::Color(255, 0, 0, _alpha));
+    if (isMouseOnSprite(w)) {
+        this->_sprite->setColor(sf::Color(3, 211, 252, _alpha));
     } else {
         this->_sprite->setColor(sf::Color(255, 255, 255, _alpha));
     }

@@ -29,12 +29,9 @@ class Game {
 
         void run();
 
-        enum Scene {
-            MENU,
-            GAME
-        };
     private:
         void handleEvents();
+        void menuEvents();
         void clear();
         void display();
 

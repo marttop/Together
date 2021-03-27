@@ -9,6 +9,7 @@
 #define MENU_HPP_
 
 #include "Layer.hpp"
+#include "EntityController.hpp"
 #include "Button.hpp"
 
 using namespace std;
@@ -19,6 +20,8 @@ class Menu {
         ~Menu();
         void displayMenu(sf::RenderWindow *w);
         void menuAnimation();
+        void clickButton(sf::RenderWindow *w);
+        void releaseButton(sf::RenderWindow *w);
     protected:
     private:
         sf::Font _font;

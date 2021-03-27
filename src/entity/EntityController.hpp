@@ -14,6 +14,13 @@
 #include <memory>
 #include <ctime>
 
+enum Scene {
+    MENU,
+    GAME
+};
+
+extern Scene global_scene;
+
 using namespace std;
 
 

@@ -17,6 +17,15 @@ Entity::Entity(sf::Texture *texture, sf::Vector2f pos)
     _particleSystem = nullptr;
 }
 
+bool Entity::isMouseOnSprite(sf::RenderWindow *w) const
+{
+    sf::Vector2i pos = sf::Mouse::getPosition(*w);
+    if (_sprite->getGlobalBounds().contains(sf::Vector2f(pos))) {
+        return (true);
+    }
+    return (false);
+}
+
 sf::Sprite &Entity::getSprite() const
 {
     return (*_sprite);
