@@ -15,6 +15,7 @@
 #include <vector>
 #include "EntityController.hpp"
 #include "Menu.hpp"
+#include "ChatBox.hpp"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ class Game {
         Menu _menu;
         Scene _scene;
         string _language;
+        ChatBox box;
 };
 
 #endif /* !GAME_HPP_ */

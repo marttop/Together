@@ -31,8 +31,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
     _parallax->drawLayers(w);
     for (auto a : _asteroid)
         w->draw(a->getSprite());
-    //w->draw(_player->getSprite(2));
-    // w->draw(_player->getSprite(1));
+    _player->drawPlayer(w);
 }
 
 void EntityController::updateAll()
