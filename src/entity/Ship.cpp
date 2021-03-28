@@ -30,18 +30,27 @@ Ship::~Ship()
 {
     delete _keys;
     delete _inputs;
+    delete[] _particleSystem;
 }
 
 void Ship::update()
 {
-    if (_inputs[0] == true && _inputs[2] == true) setPos(sf::Vector2f{getSprite().getPosition().x - (_speed / 2), getSprite().getPosition().y - (_speed / 2)});
-    else if (_inputs[0] == true && _inputs[3] == true) setPos(sf::Vector2f{getSprite().getPosition().x + (_speed / 2), getSprite().getPosition().y - (_speed / 2)});
-    else if (_inputs[1] == true && _inputs[2] == true) setPos(sf::Vector2f{getSprite().getPosition().x - (_speed / 2), getSprite().getPosition().y + (_speed / 2)});
-    else if (_inputs[1] == true && _inputs[3] == true) setPos(sf::Vector2f{getSprite().getPosition().x + (_speed / 2), getSprite().getPosition().y + (_speed / 2)});
-    else if (_inputs[0] == true) setPos(sf::Vector2f{getSprite().getPosition().x, getSprite().getPosition().y - _speed});
-    else if (_inputs[1] == true) setPos(sf::Vector2f{getSprite().getPosition().x, getSprite().getPosition().y + _speed});
-    else if (_inputs[2] == true) setPos(sf::Vector2f{getSprite().getPosition().x - _speed, getSprite().getPosition().y});
-    else if (_inputs[3] == true) setPos(sf::Vector2f{getSprite().getPosition().x + _speed, getSprite().getPosition().y});
+    if (_pos.x >= 1915 - _sprite->getLocalBounds().width / 2)
+        _inputs[3] = false;
+    if (_pos.x <= -5 + _sprite->getLocalBounds().width / 2)
+        _inputs[2] = false;
+    if (_pos.y >= 1000 - _sprite->getLocalBounds().height / 2)
+        _inputs[1] = false;
+    if (_pos.y <= 15 + _sprite->getLocalBounds().height / 2)
+        _inputs[0] = false;
+    if (_inputs[0] == true && _inputs[2] == true && _inputs[1] == false && _inputs[3] == false) setPos(sf::Vector2f{getSprite().getPosition().x - (_speed / 2), getSprite().getPosition().y - (_speed / 2)});
+    else if (_inputs[0] == true && _inputs[3] == true && _inputs[1] == false && _inputs[2] == false) setPos(sf::Vector2f{getSprite().getPosition().x + (_speed / 2), getSprite().getPosition().y - (_speed / 2)});
+    else if (_inputs[1] == true && _inputs[2] == true && _inputs[0] == false && _inputs[3] == false) setPos(sf::Vector2f{getSprite().getPosition().x - (_speed / 2), getSprite().getPosition().y + (_speed / 2)});
+    else if (_inputs[1] == true && _inputs[3] == true && _inputs[0] == false && _inputs[2] == false) setPos(sf::Vector2f{getSprite().getPosition().x + (_speed / 2), getSprite().getPosition().y + (_speed / 2)});
+    else if (_inputs[0] == true && _inputs[1] == false) setPos(sf::Vector2f{getSprite().getPosition().x, getSprite().getPosition().y - _speed});
+    else if (_inputs[1] == true && _inputs[0] == false) setPos(sf::Vector2f{getSprite().getPosition().x, getSprite().getPosition().y + _speed});
+    else if (_inputs[2] == true && _inputs[3] == false) setPos(sf::Vector2f{getSprite().getPosition().x - _speed, getSprite().getPosition().y});
+    else if (_inputs[3] == true && _inputs[2] == false) setPos(sf::Vector2f{getSprite().getPosition().x + _speed, getSprite().getPosition().y});
     _pos = _sprite->getPosition();
     _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);
     _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);

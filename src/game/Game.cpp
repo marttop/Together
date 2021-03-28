@@ -7,7 +7,7 @@
 
 #include "Game.hpp"
 
-Scene global_scene = MENU;
+Scene global_scene = GAME;
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
@@ -32,9 +32,9 @@ Game::~Game()
 void Game::handleEvents()
 {
     while (_window.pollEvent(_event)) {
+        if (_event.type == sf::Event::Closed)
+            _window.close();
         if (global_scene == GAME) {
-            if (_event.type == sf::Event::Closed)
-                _window.close();
             if (_event.type == sf::Event::KeyPressed)
                 _player->setShipMove(_event.key.code);
             if (_event.type == sf::Event::KeyReleased)
