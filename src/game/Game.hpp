@@ -19,6 +19,7 @@
 #include "Utils.hpp"
 #include "Menu.hpp"
 #include "ChatBox.hpp"
+#include "Prologue.hpp"
 #include "GameOver.hpp"
 
 using namespace std;
@@ -29,6 +30,7 @@ class Game {
         ~Game();
 
         void run();
+        void setReset(bool r);
 
     private:
         void handleEvents();
@@ -43,8 +45,10 @@ class Game {
         Menu _menu;
         Scene _scene;
         ChatBox box;
+        Prologue _prologue;
         GameOver _gameOver;
         ParticleSystem *_particles;
+        bool _reset;
 };
 
 #endif /* !GAME_HPP_ */

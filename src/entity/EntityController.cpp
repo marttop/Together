@@ -42,9 +42,16 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 void EntityController::updateAll()
 {
     _parallax->moveLayers();
+    updatePlayer();
     if (global_scene == GAME) {
-        updatePlayer();
         updateAsteroids();
+    }
+    else if (global_scene == GAME_OVER) {
+        pair<Ship *, Ship *> p = _player->getShips();
+        p.first->setHpShip(100);
+        p.second->setHpShip(100);
+        p.first->getHud()->updateHp(p.first->getHpShip());
+        p.second->getHud()->updateHp(p.second->getHpShip());
     }
 }
 
@@ -79,6 +86,8 @@ void EntityController::createRandomAsteroids()
 void EntityController::updatePlayer()
 {
     _player->update();
+    if (global_scene == GAME_OVER)
+        return;
     int i = 0;
     for (auto itr : _asteroid) {
         pair<Ship *, Ship *> p = _player->getShips();
@@ -119,4 +128,12 @@ void EntityController::destroyAsteroids()
             _asteroid.erase(_asteroid.begin() + i);
         }
     }
+}
+
+void EntityController::deleteAsteroids()
+{
+    for (size_t i = 0; i < _asteroid.size(); i++) {
+        _asteroid.pop_back();
+    }
+    _asteroid.clear();
 }

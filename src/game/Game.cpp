@@ -23,6 +23,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPointSize(7);
+    _reset = false;
 }
 
 Game::~Game()
@@ -34,6 +35,7 @@ Game::~Game()
 void Game::handleEvents()
 {
     while (_window.pollEvent(_event)) {
+        _prologue.enterEvent(_event);
         if (_event.type == sf::Event::Closed)
             _window.close();
         if (global_scene == GAME) {
@@ -41,10 +43,6 @@ void Game::handleEvents()
                 _player->setShipMove(_event.key.code);
             if (_event.type == sf::Event::KeyReleased)
                 _player->unsetShipMove(_event.key.code);
-            if (_event.type == sf::Event::KeyPressed) {
-                if (_event.key.code == sf::Keyboard::Enter)
-                    box.addLine();
-            }
         }
         if (global_scene == MENU) {
             if (_event.type == sf::Event::MouseButtonPressed) {
@@ -60,6 +58,7 @@ void Game::handleEvents()
                     _window.close();
                 if (_event.key.code == sf::Keyboard::M) {
                     global_scene = MENU;
+                    setReset(true);
                 }
             }
         }
@@ -78,25 +77,32 @@ void Game::display()
 
 void Game::run()
 {
-    // box.readMessage("res/dialog");
     while (_window.isOpen()) {
         handleEvents();
         clear();
         if (global_scene == GAME) {
+            _reset = false;
             _controller->updateAll();
             _controller->drawAll(&_window);
         } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
+            _prologue.openPrologue(&_window);
         }
         else if (global_scene == GAME_OVER) {
             _controller->updateAll();
             _controller->drawAll(&_window);
             _gameOver.updateText();
             _gameOver.drawEnd(&_window);
+            if (!_reset) {
+                _controller->deleteAsteroids();
+            }
         }
-        // box.setDialog();
-        // box.draw(&_window);
         display();
     }
+}
+
+void Game::setReset(bool r)
+{
+    _reset = r;
 }
