@@ -6,7 +6,7 @@
 */
 
 #include "ShipHud.hpp"
-
+#include <iostream>
 ShipHud::ShipHud()
 {
     _hpRect.setSize(sf::Vector2f{276, 16});
@@ -35,19 +35,21 @@ void ShipHud::setName(std::string name)
     _textName.setString(_name);
 }
 
-void ShipHud::setPositions(int left)
+void ShipHud::setPositions(int left, sf::IntRect r)
 {
+    float x = 30;
+    float y = 200;
     if (left == 0) {
-        _hpRect.setPosition(sf::Vector2f{42, 1002});
-        _barRect.setPosition(sf::Vector2f{40, 1000});
-        _box.setPosition(sf::Vector2f{30, 920});
-        _textName.setPosition(sf::Vector2f{40, 950});
+        _hpRect.setPosition(sf::Vector2f{r.left + x + 12,  r.height - y + 82});
+        _barRect.setPosition(sf::Vector2f{r.left + x + 10, r.height - y + 80});
+        _box.setPosition(sf::Vector2f{r.left + x, r.height - y});
+        _textName.setPosition(sf::Vector2f{r.left + x + 10, r.height - y + 30});
     }
     else {
-        _hpRect.setPosition(sf::Vector2f{1602, 1002});
-        _barRect.setPosition(sf::Vector2f{1600, 1000});
-        _box.setPosition(sf::Vector2f{1590, 920});
-        _textName.setPosition(sf::Vector2f{1600, 950});
+        _hpRect.setPosition(sf::Vector2f{r.width - x - 12 - 276,  r.height - y + 82});
+        _barRect.setPosition(sf::Vector2f{r.width - x - 10 - 280, r.height - y + 80});
+        _box.setPosition(sf::Vector2f{r.width - x - 300, r.height - y});
+        _textName.setPosition(sf::Vector2f{r.width - x + 10 - 300, r.height - y + 30});
     }
 }
 
