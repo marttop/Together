@@ -20,6 +20,8 @@ class Player {
         void setShipMove(sf::Keyboard::Key key);
         void unsetShipMove(sf::Keyboard::Key key);
 
+        pair<Ship *, Ship *> getShips() const;
+
     protected:
     private:
         sf::Texture _shipTextures;

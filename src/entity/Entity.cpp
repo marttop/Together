@@ -26,6 +26,16 @@ bool Entity::isMouseOnSprite(sf::RenderWindow *w) const
     return (false);
 }
 
+bool Entity::isColliding(Entity *other)
+{
+    sf::FloatRect rect1 = _sprite->getGlobalBounds();
+    sf::FloatRect rect2 = other->getSprite().getGlobalBounds();
+    if (rect1.intersects(rect2)) {
+        return (true);
+    }
+    return (false);
+}
+
 sf::Sprite &Entity::getSprite() const
 {
     return (*_sprite);

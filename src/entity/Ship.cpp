@@ -23,6 +23,7 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _rect = rectangle;
     _rectOffset = rectangle.left;
     _particleSystem = new ParticleSystem[2];
+    _isHit = false;
 }
 
 Ship::~Ship()
@@ -94,4 +95,11 @@ void Ship::drawParticles(sf::RenderWindow *w)
 {
     _particleSystem[0].drawParticles(w);
     _particleSystem[1].drawParticles(w);
+}
+
+void Ship::checkIfHit()
+{
+    if (!_isHit) {
+        return;
+    }
 }

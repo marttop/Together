@@ -21,7 +21,7 @@ class Ship : public Entity {
         void setMove(sf::Keyboard::Key key);
         void unsetMove(sf::Keyboard::Key key);
         void drawParticles(sf::RenderWindow *w);
-
+        void checkIfHit();
     protected:
     private:
         void moveShipRect();
@@ -31,6 +31,8 @@ class Ship : public Entity {
         bool *_inputs;
         int _rectOffset;
         sf::IntRect _rect;
+
+        bool _isHit;
 };
 
 #endif /* !SHIP_HPP_ */
