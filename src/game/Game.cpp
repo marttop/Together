@@ -21,6 +21,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPointSize(7);
+    _reset = false;
 }
 
 Game::~Game()
@@ -58,6 +59,7 @@ void Game::handleEvents()
                     _window.close();
                 if (_event.key.code == sf::Keyboard::M) {
                     global_scene = MENU;
+                    setReset(true);
                 }
             }
         }
@@ -81,6 +83,7 @@ void Game::run()
         handleEvents();
         clear();
         if (global_scene == GAME) {
+            _reset = false;
             _controller->updateAll();
             _controller->drawAll(&_window);
         } else if (global_scene == MENU) {
@@ -92,9 +95,17 @@ void Game::run()
             _controller->drawAll(&_window);
             _gameOver.updateText();
             _gameOver.drawEnd(&_window);
+            if (!_reset) {
+                _controller->deleteAsteroids();
+            }
         }
         // box.setDialog();
         // box.draw(&_window);
         display();
     }
+}
+
+void Game::setReset(bool r)
+{
+    _reset = r;
 }

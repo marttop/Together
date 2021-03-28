@@ -31,6 +31,7 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _ammoTexture->loadFromFile("assets/beams.png");
     _ammos[0] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
     _ammos[1] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
+    _savePos = pos;
 }
 
 Ship::~Ship()
@@ -70,6 +71,12 @@ void Ship::update(sf::Color startColor, sf::Color endColor)
     }
     _ammos[0]->update();
     _ammos[1]->update();
+    if (global_scene == GAME_OVER) {
+        for (size_t i = 0; i < 5; i++) {
+            _inputs[i] = false;
+        }
+        setPos(_savePos);
+    }
 }
 
 void Ship::moveShipRect()

@@ -15,9 +15,13 @@
 #ifndef SHIP_HPP_
 #define SHIP_HPP_
 
+class Ship;
+
 #include "Entity.hpp"
 #include "ShipHud.hpp"
 #include "Ammo.hpp"
+#include "EntityController.hpp"
+
 
 using namespace std;
 
@@ -55,6 +59,8 @@ class Ship : public Entity {
         ShipHud *_hud;
         Ammo *_ammos[2];
         float _hp;
+
+        sf::Vector2f _savePos;
 };
 
 #endif /* !SHIP_HPP_ */

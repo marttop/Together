@@ -29,6 +29,7 @@ class Game {
         ~Game();
 
         void run();
+        void setReset(bool r);
 
     private:
         void handleEvents();
@@ -44,6 +45,7 @@ class Game {
         Scene _scene;
         ChatBox box;
         GameOver _gameOver;
+        bool _reset;
 };
 
 #endif /* !GAME_HPP_ */

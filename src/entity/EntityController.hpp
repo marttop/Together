@@ -14,6 +14,7 @@
 #include <memory>
 #include <ctime>
 
+
 enum Scene {
     MENU,
     GAME,
@@ -44,6 +45,7 @@ class EntityController {
         void destroyAsteroids();
         void updateAsteroids();
         void updatePlayer();
+        void deleteAsteroids();
 
     protected:
     private:
