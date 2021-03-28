@@ -20,6 +20,8 @@ class Asteroid : public Enemy {
         void scaleAsteroid();
         sf::Sprite &getHitboxSprite();
         bool isColliding(Entity *other);
+        void reduceScale();
+        sf::Vector2f getscale() const;
     protected:
     private:
         int _direction;
