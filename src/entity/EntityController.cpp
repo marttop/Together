@@ -52,6 +52,35 @@ void EntityController::addAsteroid(sf::Vector2f pos)
     _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos, 2 + (rand() % 6)));
 }
 
+void EntityController::checkShooting()
+{
+    int index = 0;
+    for (auto itr : _asteroid) {
+        vector<Bullet *> *a = &this->_player->getShip(0).getAmmos(0).getLasers();
+        vector<Bullet *> *b = &this->_player->getShip(0).getAmmos(1).getLasers();
+        vector<Bullet *> *c = &this->_player->getShip(1).getAmmos(0).getLasers();
+        vector<Bullet *> *d = &this->_player->getShip(1).getAmmos(1).getLasers();
+
+        for (size_t i = 0; i < a->size(); i++) {
+            if (itr->isColliding(a->at(i)) || itr->isColliding(b->at(i))) {
+                _asteroid.erase(_asteroid.begin() + index);
+                a->erase(a->begin() + i);
+                b->erase(b->begin() + i);
+                break;
+            }
+        }
+        for (size_t i = 0; i < c->size(); i++) {
+            if (itr->isColliding(c->at(i)) || itr->isColliding(d->at(i))) {
+                _asteroid.erase(_asteroid.begin() + index);
+                c->erase(c->begin() + i);
+                d->erase(d->begin() + i);
+                break;
+            }
+        }
+        index++;
+    }
+}
+
 void EntityController::createRandomAsteroids()
 {
     bool isSpawned = false;
@@ -97,6 +126,7 @@ void EntityController::updatePlayer()
         }
         i++;
     }
+    checkShooting();
 }
 
 void EntityController::updateAsteroids()

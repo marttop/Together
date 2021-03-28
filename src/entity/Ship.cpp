@@ -160,3 +160,9 @@ void Ship::setHpShip(float newHp)
 {
     _hp = newHp;
 }
+
+Ammo &Ship::getAmmos(int i)
+{
+    // if (i > 1) return (nullptr);
+    return (*_ammos[i]);
+}

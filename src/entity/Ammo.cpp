@@ -54,3 +54,8 @@ void Ammo::setRect(sf::IntRect rect)
 {
     _rect = rect;
 }
+
+vector<Bullet *> &Ammo::getLasers()
+{
+    return (_ammos);
+}

@@ -20,6 +20,7 @@ class Ammo {
         void drawAmmos(sf::RenderWindow *w);
         void update();
         void setRect(sf::IntRect rect);
+        vector<Bullet *> &getLasers();
 
     protected:
     private:

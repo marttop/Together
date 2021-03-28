@@ -99,3 +99,10 @@ pair<Ship *, Ship *> Player::getShips() const
 {
     return (make_pair(_ship1, _ship2));
 }
+
+Ship &Player::getShip(int i) const
+{
+    if (i == 0)
+        return (*_ship1);
+    return (*_ship2);
+}

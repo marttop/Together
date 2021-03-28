@@ -25,6 +25,7 @@ class Player {
         void unsetShipMove(sf::Keyboard::Key key);
         string loadNames(string filepath);
         pair<Ship *, Ship *> getShips() const;
+        Ship &getShip(int i) const;
 
     protected:
     private:

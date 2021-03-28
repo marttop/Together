@@ -39,6 +39,7 @@ class Ship : public Entity {
         float getHpShip() const;
         void setHpShip(float newHp);
         void drawAmmos(sf::RenderWindow *w);
+        Ammo &getAmmos(int i);
 
     protected:
     private:
