@@ -213,7 +213,7 @@ void EntityController::destroyAsteroids()
 void EntityController::destroyNyanCat()
 {
     for (size_t i = 0; i < _nyanCat.size(); i++) {
-        if (_nyanCat[i]->getPos().y >= 2000 || _nyanCat[i]->getPos().y <= -500) {
+        if (_nyanCat[i]->getPos().y >= 2000 || _nyanCat[i]->getPos().y <= -1000) {
             _nyanCat.erase(_nyanCat.begin() + i);
         }
     }
