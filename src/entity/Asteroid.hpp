@@ -23,6 +23,7 @@ class Asteroid : public Enemy {
         int _direction;
         sf::Clock _rotationClock;
         float _rotationSpeed;
+        int _trail;
 };
 
 #endif /* !ASTEROID_HPP_ */

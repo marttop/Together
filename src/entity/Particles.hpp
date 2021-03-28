@@ -13,10 +13,11 @@
 class Particle
 {
     public:
-        Particle(sf::Color startColor, sf::Color endColor, int life, sf::Vector2f direction);
+        Particle(sf::Color startColor, sf::Color endColor, int life, sf::Vector2f direction, sf::Vector2f randomDirection);
         ~Particle();
 
         void setDirection(sf::Vector2f direction);
+        void setRandomDirection(sf::Vector2f direction);
         void setPosition(sf::Vector2f position);
         void setColor(sf::Color color);
         void setTimeStep(float timeStep);
@@ -27,6 +28,7 @@ class Particle
         sf::Color getEndColor();
         sf::Vector2f getPosition();
         sf::Vector2f getDirection();
+        sf::Vector2f getRandomDirection();
 
     protected:
     private:
@@ -34,6 +36,7 @@ class Particle
         sf::Color _endColor;
         sf::VertexArray _part;
         sf::Vector2f _direction;
+        sf::Vector2f _randomDirection;
         int _life;
         float _timeStep;
         bool _dead;
@@ -45,12 +48,12 @@ class ParticleSystem
         ParticleSystem();
         ~ParticleSystem();
 
-        void update(sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, sf::Color startColor, sf::Color endColor, int life);
+        void update(sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, sf::Color startColor, sf::Color endColor, int life, int isRand);
         void drawParticles(sf::RenderWindow *window);
 
     protected:
     private:
-        Particle *createParticle(sf::Color startColor, sf::Color endColor, sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, int life);
+        Particle *createParticle(sf::Color startColor, sf::Color endColor, sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f randomDirection, sf::Vector2f position, int life);
         sf::Color rgbInterpolation(sf::Color startColor, float timeStep, sf::Color endColor);
 
         std::vector<Particle *> _particles;

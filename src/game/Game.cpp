@@ -9,7 +9,7 @@
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
-    _scene = MENU;
+    _scene = GAME;
     _window.create(sf::VideoMode(width, height), winTitle);
     _window.setFramerateLimit(60);
     _player = new Player;

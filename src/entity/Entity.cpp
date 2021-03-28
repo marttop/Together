@@ -58,3 +58,8 @@ Entity::~Entity()
     if (_sprite)
         delete _sprite;
 }
+
+void Entity::drawParticles(sf::RenderWindow *w)
+{
+    _particleSystem->drawParticles(w);
+}

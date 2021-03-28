@@ -29,8 +29,10 @@ EntityController::~EntityController()
 void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
-    for (auto a : _asteroid)
+    for (auto a : _asteroid) {
+        a->drawParticles(w);
         w->draw(a->getSprite());
+    }
     _player->drawPlayer(w);
 }
 
@@ -50,7 +52,7 @@ void EntityController::createRandomAsteroids()
 {
     if (_asteroidClock.getElapsedTime().asSeconds() > _randTime) {
         float x = rand() % 1920;
-        addAsteroid(sf::Vector2f{x, -500});
+        addAsteroid(sf::Vector2f{x, -300});
         _asteroidClock.restart();
         _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
     }
@@ -69,7 +71,7 @@ void EntityController::updateAsteroids()
 void EntityController::destroyAsteroids()
 {
     for (size_t i = 0; i < _asteroid.size(); i++) {
-        if (_asteroid[i]->getPos().y >= 1250) {
+        if (_asteroid[i]->getPos().y >= 2000) {
             _asteroid.erase(_asteroid.begin() + i);
         }
     }

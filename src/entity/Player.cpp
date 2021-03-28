@@ -34,9 +34,10 @@ sf::Sprite &Player::getSprite(int i) const
 
 void Player::drawPlayer(sf::RenderWindow *w)
 {
+    _ship1->drawParticles(w);
+    _ship2->drawParticles(w);
     w->draw(_ship1->getSprite());
     w->draw(_ship2->getSprite());
-    _ship1->drawParticles(w);
 }
 
 void Player::update()

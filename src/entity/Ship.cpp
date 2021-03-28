@@ -12,6 +12,7 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
 {
     _keys = keys;
     _sprite->setTextureRect(rectangle);
+    _sprite->setOrigin(sf::Vector2f{_sprite->getGlobalBounds().height / 2, _sprite->getGlobalBounds().width / 2});
     _speed = 8;
     _inputs = new bool[5];
     _inputs[0] = false;
@@ -21,7 +22,7 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _inputs[4] = false;
     _rect = rectangle;
     _rectOffset = rectangle.left;
-    _particleSystem = new ParticleSystem();
+    _particleSystem = new ParticleSystem[2];
 }
 
 Ship::~Ship()
@@ -40,12 +41,9 @@ void Ship::update()
     else if (_inputs[1] == true) setPos(sf::Vector2f{getSprite().getPosition().x, getSprite().getPosition().y + _speed});
     else if (_inputs[2] == true) setPos(sf::Vector2f{getSprite().getPosition().x - _speed, getSprite().getPosition().y});
     else if (_inputs[3] == true) setPos(sf::Vector2f{getSprite().getPosition().x + _speed, getSprite().getPosition().y});
-    _particleSystem->update(sf::Vector2f{0, 0}, sf::Vector2f{2, 2}, _pos, sf::Color::Red, sf::Color::Blue, 10);
-}
-
-void Ship::drawParticles(sf::RenderWindow *w)
-{
-    _particleSystem->drawParticles(w);
+    _pos = _sprite->getPosition();
+    _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);
+    _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);
 }
 
 void Ship::moveShipRect()
@@ -81,4 +79,10 @@ void Ship::unsetMove(sf::Keyboard::Key key)
     if (i == 3) _inputs[3] = false;
     if (i == 4) _inputs[4] = false;
     moveShipRect();
+}
+
+void Ship::drawParticles(sf::RenderWindow *w)
+{
+    _particleSystem[0].drawParticles(w);
+    _particleSystem[1].drawParticles(w);
 }

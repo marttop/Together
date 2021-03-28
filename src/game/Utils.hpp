@@ -23,6 +23,7 @@ class Utils {
         sf::Vector2f rotatePointAroundCenter(sf::Vector2f point, sf::Vector2f center, float angle_rad);
         sf::Vector2f getRandomNormalizedVector();
         float dotProduct(sf::Vector2f vector_a, sf::Vector2f vector_b);
+        void posDebug(sf::Vector2f pos, sf::RenderWindow &window);
 
     protected:
     private:

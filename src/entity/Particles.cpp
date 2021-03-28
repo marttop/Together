@@ -7,7 +7,7 @@
 
 #include "Particles.hpp"
 
-Particle::Particle(sf::Color startColor, sf::Color endColor, int life, sf::Vector2f direction)
+Particle::Particle(sf::Color startColor, sf::Color endColor, int life, sf::Vector2f direction, sf::Vector2f randomDirection)
 {
     _part = sf::VertexArray(sf::Points, 1);
     _life = life;
@@ -16,6 +16,7 @@ Particle::Particle(sf::Color startColor, sf::Color endColor, int life, sf::Vecto
     _timeStep = 0.0f;
     _dead = false;
     _direction = direction;
+    _randomDirection = randomDirection;
 }
 
 Particle::~Particle()
@@ -25,6 +26,11 @@ Particle::~Particle()
 void Particle::setDirection(sf::Vector2f direction)
 {
     _direction = direction;
+}
+
+void Particle::setRandomDirection(sf::Vector2f randomDirection)
+{
+    _randomDirection = randomDirection;
 }
 
 void Particle::setPosition(sf::Vector2f position)
@@ -72,6 +78,11 @@ sf::Vector2f Particle::getDirection()
     return (_direction);
 }
 
+sf::Vector2f Particle::getRandomDirection()
+{
+    return (_randomDirection);
+}
+
 sf::VertexArray Particle::getParticle()
 {
     return (_part);
@@ -99,9 +110,9 @@ sf::Color ParticleSystem::rgbInterpolation(sf::Color startColor, float timeStep,
 	return (finalColor);
 }
 
-Particle *ParticleSystem::createParticle(sf::Color startColor, sf::Color endColor, sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, int life)
+Particle *ParticleSystem::createParticle(sf::Color startColor, sf::Color endColor, sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f randomDirection, sf::Vector2f position, int life)
 {
-    Particle *particle = new Particle(startColor, endColor, life, direction);
+    Particle *particle = new Particle(startColor, endColor, life, direction, randomDirection);
 
     position.x += offset.x;
     position.y += offset.y;
@@ -115,7 +126,7 @@ Particle *ParticleSystem::createParticle(sf::Color startColor, sf::Color endColo
     return (particle);
 }
 
-void ParticleSystem::update(sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, sf::Color startColor, sf::Color endColor, int life)
+void ParticleSystem::update(sf::Vector2f offset, sf::Vector2f direction, sf::Vector2f position, sf::Color startColor, sf::Color endColor, int life, int isRand)
 {
     int number = _utils->vectorMagnitude(sf::Vector2f(direction.x, direction.y));
     if (number == 0) number = 1;
@@ -125,24 +136,24 @@ void ParticleSystem::update(sf::Vector2f offset, sf::Vector2f direction, sf::Vec
     if (speed == 0) speed = 1;
     else if (speed > 5) speed = 5;
 
-    sf::Vector2f randomDirection = _utils->getRandomNormalizedVector();
+    int tmpLife = life;
     for (int i = 0, value = 10; i != number; i++) {
-        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{rand() % (value - value / 3) + offset.x, rand() % (value - value / 3) + offset.y}, randomDirection, position, life));
-        randomDirection = _utils->getRandomNormalizedVector();
-        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{-(rand() % (value - value / 3) + offset.x), -(rand() % (value - value / 3) + offset.y)}, randomDirection, position, life));
-        randomDirection = _utils->getRandomNormalizedVector();
-        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{rand() % (value - value / 3) + offset.x, -(rand() % (value - value / 3) + offset.y)}, randomDirection, position, life));
-        randomDirection = _utils->getRandomNormalizedVector();
-        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{-(rand() % (value - value / 3) + offset.x), rand() % (value - value / 3) + offset.y}, randomDirection, position, life));
-        randomDirection = _utils->getRandomNormalizedVector();
+        if (isRand == 1) tmpLife = rand() % life;
+        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{rand() % (value - value / 3) + offset.x, rand() % (value - value / 3) + offset.y}, direction, _utils->getRandomNormalizedVector(), position, tmpLife));
+        if (isRand == 1) tmpLife = rand() % life;
+        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{-(rand() % (value - value / 3) + offset.x), -(rand() % (value - value / 3) + offset.y)}, direction, _utils->getRandomNormalizedVector(), position, tmpLife));
+        if (isRand == 1) tmpLife = rand() % life;
+        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{rand() % (value - value / 3) + offset.x, -(rand() % (value - value / 3) + offset.y)}, direction, _utils->getRandomNormalizedVector(), position, tmpLife));
+        if (isRand == 1) tmpLife = rand() % life;
+        _particles.push_back(createParticle(startColor, endColor, sf::Vector2f{-(rand() % (value - value / 3) + offset.x), rand() % (value - value / 3) + offset.y}, direction, _utils->getRandomNormalizedVector(), position, tmpLife));
     }
     for (size_t i = 0; i < _particles.size(); i++) {
         _particles[i]->setTimeStep(_particles[i]->getTimeStep() + (1.0f / _particles[i]->getLife()));
         sf::Color resColor = rgbInterpolation(_particles[i]->getStartColor(), _particles[i]->getTimeStep(), _particles[i]->getEndColor());
         _particles[i]->setColor(resColor);
         _particles[i]->setPosition(
-            sf::Vector2f{_particles[i]->getPosition().x + (_particles[i]->getDirection().x * (randomDirection.x * speed)),
-            _particles[i]->getPosition().y + (_particles[i]->getDirection().y * (randomDirection.y * speed))}
+            sf::Vector2f{_particles[i]->getPosition().x + (_particles[i]->getDirection().x * (_particles[i]->getRandomDirection().x * speed)),
+            _particles[i]->getPosition().y + (_particles[i]->getDirection().y * speed)}
         );
         if (_particles[i]->getTimeStep() > 1.0f) {
             delete _particles[i];
@@ -153,6 +164,7 @@ void ParticleSystem::update(sf::Vector2f offset, sf::Vector2f direction, sf::Vec
 
 void ParticleSystem::drawParticles(sf::RenderWindow *window)
 {
-    for (size_t i = 0; i < _particles.size(); i++)
+    for (size_t i = 0; i < _particles.size(); i++) {
         window->draw(_particles[i]->getParticle());
+    }
 }

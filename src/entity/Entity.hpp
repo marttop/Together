@@ -29,6 +29,7 @@ class Entity {
         void setPos(sf::Vector2f pos);
         void restartClock();
         void setRotation(float angle);
+        void drawParticles(sf::RenderWindow *w);
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;
