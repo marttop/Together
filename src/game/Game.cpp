@@ -112,7 +112,7 @@ void Game::run()
             _reset = false;
             _controller->updateAll();
             _controller->drawAll(&_window);
-            if (global_nyan == 1 && !gameOver) {
+            if (global_nyan == 10 && !gameOver) {
                 global_nyan = 0;
                 global_scene = GAME_WON;
             }
@@ -123,6 +123,8 @@ void Game::run()
         else if (global_scene == PROLOGUE) {
             _menu.displayMenu(&_window);
             _prologue.openPrologue(&_window);
+            _gameOver.setTextLang();
+            _gameWon.setTextLang();
         }
         else if (global_scene == GAME_OVER) {
             _controller->updateAll();

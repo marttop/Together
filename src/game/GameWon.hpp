@@ -19,6 +19,7 @@ class GameWon {
         ~GameWon();
         void drawEnd(sf::RenderWindow *w);
         void updateText();
+        void setTextLang();
     private:
         sf::Font _font;
         sf::Text _gameWonText;
