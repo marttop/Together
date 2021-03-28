@@ -41,6 +41,7 @@ SRC				=	src/main.cpp \
 					src/entity/ShipHud.cpp \
 					src/entity/Bullet.cpp \
 					src/entity/Ammo.cpp \
+					src/entity/NyanCat.cpp \
 
 
 OBJ				=	$(SRC:.cpp=.o)
