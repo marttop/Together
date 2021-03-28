@@ -49,11 +49,16 @@ void Prologue::enterEvent(sf::Event event)
 void Prologue::openPrologue(sf::RenderWindow *w)
 {
     if (_isOpen == false && (_index < (int)_path.size() - 1)) {
+        sf::IntRect r = w->getViewport(w->getView());
         _chat.setLanguage(global_language);
         _isOpen = true;
         _index++;
         _chat.readMessage(_path[_index].first);
         _chat.loadSprite(_path[_index].second);
+        _chat.setPositions(r);
     }
     displayPrologue(w);
+    if (_isOpen == false && (_index == (int)_path.size() - 1)) {
+        global_scene = GAME;
+    }
 }
