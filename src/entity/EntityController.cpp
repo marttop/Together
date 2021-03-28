@@ -35,11 +35,11 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
     if (global_scene == GAME) {
-        for (auto a : _asteroid) {
+        for (auto a : _nyanCat) {
             a->drawParticles(w);
             w->draw(a->getSprite());
         }
-        for (auto a : _nyanCat) {
+        for (auto a : _asteroid) {
             a->drawParticles(w);
             w->draw(a->getSprite());
         }
@@ -225,4 +225,12 @@ void EntityController::deleteAsteroids()
         _asteroid.pop_back();
     }
     _asteroid.clear();
+}
+
+void EntityController::deleteNyanCat()
+{
+    for (size_t i = 0; i < _nyanCat.size(); i++) {
+        _nyanCat.pop_back();
+    }
+    _nyanCat.clear();
 }

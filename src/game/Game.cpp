@@ -100,6 +100,7 @@ void Game::run()
             _gameOver.drawEnd(&_window);
             if (!_reset) {
                 _controller->deleteAsteroids();
+                _controller->deleteNyanCat();
             }
             _endLost.openEndLost(&_window);
         }

@@ -55,6 +55,7 @@ class EntityController {
         void addNyan(sf::Vector2f pos);
         void updateNyanCat();
         void destroyNyanCat();
+        void deleteNyanCat();
 
     protected:
     private:
