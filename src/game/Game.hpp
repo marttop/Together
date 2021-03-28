@@ -19,6 +19,7 @@
 #include "Utils.hpp"
 #include "Menu.hpp"
 #include "ChatBox.hpp"
+#include "Prologue.hpp"
 #include "GameOver.hpp"
 
 using namespace std;
@@ -44,6 +45,7 @@ class Game {
         Menu _menu;
         Scene _scene;
         ChatBox box;
+        Prologue _prologue;
         GameOver _gameOver;
         bool _reset;
 };

@@ -20,15 +20,17 @@ class ChatBox {
     public:
         ChatBox();
         ~ChatBox();
+
         void readMessage(const std::string &msgPath);
-        char readLetter();
-        std::string readLine(std::string msg);
-        void addLine();
+        void setDialog();
         void draw(sf::RenderWindow *w);
         std::vector<sf::Text> getDialog() const;
         sf::RectangleShape getBox() const;
-        void setDialog();
+        void addLine();
         void setLanguage(std::string language);
+        bool isOpen() const;
+        char readLetter();
+        std::string readLine(std::string msg);
         void loadSprite(const std::string &texturePath);
     private:
         sf::Clock textClock;
@@ -41,7 +43,8 @@ class ChatBox {
         std::string lang;
         std::ifstream _file;
         size_t _lines;
-        bool isOpen;
+        bool _isOpen;
+        bool _isFinished;
         bool newline;
         bool read;
         bool allLine;
