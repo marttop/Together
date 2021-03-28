@@ -60,7 +60,8 @@ class EntityController {
         void updateNyanCat();
         void destroyNyanCat();
         void deleteNyanCat();
-
+        void setLangCounter();
+        string loadtxt();
     protected:
     private:
         sf::Clock _asteroidClock;

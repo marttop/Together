@@ -59,6 +59,7 @@ void Game::handleEvents()
             }
             if (_event.type == sf::Event::MouseButtonReleased) {
                 _menu.releaseButton(&_window);
+                this->_controller->loadtxt();
             }
         }
         if (global_scene == GAME_OVER) {
