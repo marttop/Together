@@ -20,6 +20,7 @@ enum Scene {
     MENU,
     GAME,
     GAME_OVER,
+    PROLOGUE,
 };
 
 class Player;

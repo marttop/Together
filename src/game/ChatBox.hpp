@@ -32,6 +32,7 @@ class ChatBox {
         char readLetter();
         std::string readLine(std::string msg);
         void loadSprite(const std::string &texturePath);
+        void setPositions(sf::IntRect r);
     private:
         sf::Clock textClock;
         sf::Font _font;

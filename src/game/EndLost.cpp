@@ -2,31 +2,24 @@
 ** EPITECH PROJECT, 2021
 ** G-JAM-001-NCE-0-2-jam-marton.szuts
 ** File description:
-** Prologue
+** EndLost
 */
 
-#include "Prologue.hpp"
+#include "EndLost.hpp"
 
-Prologue::Prologue()
+EndLost::EndLost()
 {
-    _path.push_back(make_pair("res/prologue", "assets/yoda.png"));
-    _path.push_back(make_pair("res/prologue1", "assets/vador.png"));
-    _path.push_back(make_pair("res/prologue2", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue3", "assets/yoda.png"));
-    _path.push_back(make_pair("res/prologue4", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue5", "assets/vador.png"));
-    _path.push_back(make_pair("res/prologue6", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue7", "assets/vador.png"));
+    _path.push_back(make_pair("res/endlost", "assets/yoda.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;
 }
 
-Prologue::~Prologue()
+EndLost::~EndLost()
 {
 }
 
-void Prologue::displayPrologue(sf::RenderWindow *w)
+void EndLost::displayEndLost(sf::RenderWindow *w)
 {
     if (_chat.isOpen()) {
         _chat.setDialog();
@@ -36,7 +29,7 @@ void Prologue::displayPrologue(sf::RenderWindow *w)
     }
 }
 
-void Prologue::enterEvent(sf::Event event)
+void EndLost::enterEvent(sf::Event event)
 {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
@@ -45,7 +38,7 @@ void Prologue::enterEvent(sf::Event event)
     }
 }
 
-void Prologue::openPrologue(sf::RenderWindow *w)
+void EndLost::openEndLost(sf::RenderWindow *w)
 {
     if (_isOpen == false && (_index < (int)_path.size() - 1)) {
         sf::IntRect r = w->getViewport(w->getView());
@@ -56,8 +49,8 @@ void Prologue::openPrologue(sf::RenderWindow *w)
         _chat.loadSprite(_path[_index].second);
         _chat.setPositions(r);
     }
-    displayPrologue(w);
+    displayEndLost(w);
     if (_isOpen == false && (_index == (int)_path.size() - 1)) {
-        global_scene = GAME;
+        global_scene = GAME_OVER;
     }
 }

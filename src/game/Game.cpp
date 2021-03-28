@@ -53,6 +53,7 @@ void Game::handleEvents()
             }
         }
         if (global_scene == GAME_OVER) {
+            _endLost.enterEvent(_event);
             if (_event.type == sf::Event::KeyPressed) {
                 if (_event.key.code == sf::Keyboard::Escape)
                     _window.close();
@@ -87,6 +88,9 @@ void Game::run()
         } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
+        }
+        else if (global_scene == PROLOGUE) {
+            _menu.displayMenu(&_window);
             _prologue.openPrologue(&_window);
         }
         else if (global_scene == GAME_OVER) {
@@ -97,6 +101,7 @@ void Game::run()
             if (!_reset) {
                 _controller->deleteAsteroids();
             }
+            _endLost.openEndLost(&_window);
         }
         display();
     }
