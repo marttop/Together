@@ -9,6 +9,7 @@
 #define SHIP_HPP_
 
 #include "Entity.hpp"
+#include "ShipHud.hpp"
 
 using namespace std;
 
@@ -22,6 +23,13 @@ class Ship : public Entity {
         void unsetMove(sf::Keyboard::Key key);
         void drawParticles(sf::RenderWindow *w);
         void checkIfHit();
+        sf::Text getName() const;
+        sf::RectangleShape getBox() const;
+        sf::RectangleShape getBar() const;
+        sf::RectangleShape getHpRect() const;
+        ShipHud *getHud() const;
+        float getHpShip() const;
+        void setHpShip(float newHp);
     protected:
     private:
         void moveShipRect();
@@ -33,6 +41,8 @@ class Ship : public Entity {
         sf::IntRect _rect;
 
         bool _isHit;
+        ShipHud *_hud;
+        float _hp;
 };
 
 #endif /* !SHIP_HPP_ */

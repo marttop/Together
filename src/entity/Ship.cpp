@@ -24,6 +24,9 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _rectOffset = rectangle.left;
     _particleSystem = new ParticleSystem[2];
     _isHit = false;
+    _hud = new ShipHud();
+    _hud->setHp(100);
+    _hp = 100;
 }
 
 Ship::~Ship()
@@ -102,4 +105,39 @@ void Ship::checkIfHit()
     if (!_isHit) {
         return;
     }
+}
+
+sf::Text Ship::getName() const
+{
+    return _hud->getName();
+}
+
+sf::RectangleShape Ship::getBox() const
+{
+    return _hud->getBox();
+}
+
+sf::RectangleShape Ship::getBar() const
+{
+    return _hud->getBar();
+}
+
+sf::RectangleShape Ship::getHpRect() const
+{
+    return _hud->getHpRect();
+}
+
+ShipHud *Ship::getHud() const
+{
+    return _hud;
+}
+
+float Ship::getHpShip() const
+{
+    return _hp;
+}
+
+void Ship::setHpShip(float newHp)
+{
+    _hp = newHp;
 }

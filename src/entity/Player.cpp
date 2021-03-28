@@ -18,6 +18,10 @@ Player::Player()
     keys2[0] = sf::Keyboard::Up, keys2[1] = sf::Keyboard::Down, keys2[2] = sf::Keyboard::Left, keys2[3] = sf::Keyboard::Right, keys2[4] = sf::Keyboard::Space;
     _ship2 = new Ship(&_shipTextures, sf::Vector2f{(1920 / 3 - ((float)_shipTextures.getSize().x / 3 / 2)) * 2, (1080 / 8) * 6},
                         sf::IntRect{(int)_shipTextures.getSize().x / 3, 0, (int)_shipTextures.getSize().x / 3, (int)_shipTextures.getSize().y}, keys2);
+    _ship1->getHud()->setName("Player 1");
+    _ship2->getHud()->setName("Player 2");
+    _ship1->getHud()->setPositions(0);
+    _ship2->getHud()->setPositions(1);
 }
 
 Player::~Player()
@@ -43,6 +47,14 @@ void Player::drawPlayer(sf::RenderWindow *w)
     glEnd();
     w->draw(_ship1->getSprite());
     w->draw(_ship2->getSprite());
+    w->draw(_ship1->getBox());
+    w->draw(_ship1->getName());
+    w->draw(_ship1->getBar());
+    w->draw(_ship1->getHpRect());
+    w->draw(_ship2->getBox());
+    w->draw(_ship2->getName());
+    w->draw(_ship2->getBar());
+    w->draw(_ship2->getHpRect());
 }
 
 void Player::update()

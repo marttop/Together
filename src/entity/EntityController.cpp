@@ -50,11 +50,24 @@ void EntityController::addAsteroid(sf::Vector2f pos)
 
 void EntityController::createRandomAsteroids()
 {
+    bool isSpawned = false;
     if (_asteroidClock.getElapsedTime().asSeconds() > _randTime) {
-        float x = rand() % 1920;
-        addAsteroid(sf::Vector2f{x, -300});
-        _asteroidClock.restart();
-        _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+        for (int i = 0; !isSpawned; ) {
+            float x = rand() % 1920;
+            i = 0;
+            addAsteroid(sf::Vector2f{x, -300});
+            _asteroidClock.restart();
+            _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+            for (auto itr : _asteroid) {
+                if (itr != _asteroid.back() && !itr->isColliding(_asteroid.back())) {
+                    i++;
+                }
+            }
+            if (i + 1 == _asteroid.size())
+                isSpawned = true;
+            else
+                _asteroid.pop_back();
+        }
     }
 }
 
@@ -66,9 +79,13 @@ void EntityController::updatePlayer()
         pair<Ship *, Ship *> p = _player->getShips();
         if (itr->isColliding((Entity *)p.first)) {
             _asteroid.erase(_asteroid.begin() + i);
+            p.first->setHpShip(p.first->getHpShip() - 10);
+            p.first->getHud()->updateHp(p.first->getHpShip());
         }
         if (itr->isColliding((Entity *)p.second)) {
             _asteroid.erase(_asteroid.begin() + i);
+            p.second->setHpShip(p.second->getHpShip() - 10);
+            p.second->getHud()->updateHp(p.second->getHpShip());
         }
         i++;
     }

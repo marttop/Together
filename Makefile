@@ -33,6 +33,7 @@ SRC				=	src/main.cpp \
 					src/entity/Parallax.cpp \
 					src/entity/Layer.cpp \
 					src/entity/Particles.cpp \
+					src/entity/ShipHud.cpp \
 
 OBJ				=	$(SRC:.cpp=.o)
 
