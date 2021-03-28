@@ -58,4 +58,7 @@ void Prologue::openPrologue(sf::RenderWindow *w)
         _chat.setPositions(r);
     }
     displayPrologue(w);
+    if (_isOpen == false && (_index == (int)_path.size() - 1)) {
+        global_scene = GAME;
+    }
 }

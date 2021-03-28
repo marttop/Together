@@ -87,6 +87,9 @@ void Game::run()
         } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
+        }
+        else if (global_scene == PROLOGUE) {
+            _menu.displayMenu(&_window);
             _prologue.openPrologue(&_window);
         }
         else if (global_scene == GAME_OVER) {

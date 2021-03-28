@@ -51,10 +51,12 @@ void Menu::displayMenu(sf::RenderWindow *w)
 {
     w->draw(_background->getSprite());
     w->draw(_title);
-    for (auto itr : _buttons) {
-        itr->drawButton(w);
-        if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            itr->btnHover(w);
+    if (global_scene == MENU) {
+        for (auto itr : _buttons) {
+            itr->drawButton(w);
+            if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                itr->btnHover(w);
+        }
     }
 }
 
@@ -74,7 +76,7 @@ void Menu::releaseButton(sf::RenderWindow *w)
         for (auto itr : _buttons) {
             if (itr->isMouseOnSprite(w)) {
                 if (itr == _buttons.at(0))
-                    global_scene = GAME;
+                    global_scene = PROLOGUE;
                 if (itr == _buttons.at(1))
                     w->close();
                 if (itr == _buttons.at(2) && global_language != ".fr") {
