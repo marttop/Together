@@ -19,6 +19,8 @@ enum Scene {
     GAME
 };
 
+class Player;
+
 extern Scene global_scene;
 extern string global_language;
 

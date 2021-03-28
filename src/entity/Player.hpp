@@ -8,8 +8,11 @@
 #ifndef PLAYER_HPP_
 #define PLAYER_HPP_
 
+
+#include "EntityController.hpp"
 #include "Ship.hpp"
 #include "SFML/OpenGL.hpp"
+#include <fstream>
 
 class Player {
     public:
@@ -20,7 +23,7 @@ class Player {
         void update();
         void setShipMove(sf::Keyboard::Key key);
         void unsetShipMove(sf::Keyboard::Key key);
-
+        string loadNames(string filepath);
         pair<Ship *, Ship *> getShips() const;
 
     protected:

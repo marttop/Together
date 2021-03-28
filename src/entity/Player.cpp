@@ -20,8 +20,8 @@ Player::Player()
                         sf::IntRect{(int)_shipTextures.getSize().x / 3, 0, (int)_shipTextures.getSize().x / 3, (int)_shipTextures.getSize().y}, keys2);
     _ship1->setColor(sf::Color{255, 200, 200, 255});
     _ship2->setColor(sf::Color{200, 200, 255, 255});
-    _ship1->getHud()->setName("Player 1");
-    _ship2->getHud()->setName("Player 2");
+    _ship1->getHud()->setName(loadNames("res/player1_name"));
+    _ship2->getHud()->setName(loadNames("res/player2_name"));
     _ship1->getHud()->setPositions(0);
     _ship2->getHud()->setPositions(1);
 }
@@ -36,6 +36,18 @@ sf::Sprite &Player::getSprite(int i) const
 {
     if (i == 1) return (_ship1->getSprite());
     else return (_ship2->getSprite());
+}
+
+string Player::loadNames(string filepath)
+{
+    ifstream file;
+    string line;
+    file.open(filepath + global_language);
+    if (file.is_open()) {
+        getline(file, line);
+        file.close();
+    }
+    return (line);
 }
 
 void Player::drawPlayer(sf::RenderWindow *w)
