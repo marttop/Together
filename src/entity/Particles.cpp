@@ -78,6 +78,12 @@ sf::Vector2f Particle::getDirection()
     return (_direction);
 }
 
+void Particle::setColors(sf::Color startColor, sf::Color endColor)
+{
+    _startColor = startColor;
+    _endColor = endColor;
+}
+
 sf::Vector2f Particle::getRandomDirection()
 {
     return (_randomDirection);

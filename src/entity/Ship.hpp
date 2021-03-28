@@ -18,7 +18,7 @@ class Ship : public Entity {
         Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Keyboard::Key *keys);
         ~Ship();
 
-        void update();
+        void update(sf::Color startColor, sf::Color endColor);
         void setMove(sf::Keyboard::Key key);
         void unsetMove(sf::Keyboard::Key key);
         void drawParticles(sf::RenderWindow *w);

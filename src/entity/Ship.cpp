@@ -36,7 +36,7 @@ Ship::~Ship()
     delete[] _particleSystem;
 }
 
-void Ship::update()
+void Ship::update(sf::Color startColor, sf::Color endColor)
 {
     if (_pos.x >= 1915 - _sprite->getLocalBounds().width / 2)
         _inputs[3] = false;
@@ -55,8 +55,8 @@ void Ship::update()
     else if (_inputs[2] == true && _inputs[3] == false) setPos(sf::Vector2f{getSprite().getPosition().x - _speed, getSprite().getPosition().y});
     else if (_inputs[3] == true && _inputs[2] == false) setPos(sf::Vector2f{getSprite().getPosition().x + _speed, getSprite().getPosition().y});
     _pos = _sprite->getPosition();
-    _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);
-    _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 75}, 15, 1);
+    _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, startColor, endColor, 15, 1);
+    _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, startColor, endColor, 15, 1);
 }
 
 void Ship::moveShipRect()

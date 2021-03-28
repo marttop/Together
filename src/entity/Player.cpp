@@ -18,6 +18,8 @@ Player::Player()
     keys2[0] = sf::Keyboard::Up, keys2[1] = sf::Keyboard::Down, keys2[2] = sf::Keyboard::Left, keys2[3] = sf::Keyboard::Right, keys2[4] = sf::Keyboard::Space;
     _ship2 = new Ship(&_shipTextures, sf::Vector2f{(1920 / 3 - ((float)_shipTextures.getSize().x / 3 / 2)) * 2, (1080 / 8) * 6},
                         sf::IntRect{(int)_shipTextures.getSize().x / 3, 0, (int)_shipTextures.getSize().x / 3, (int)_shipTextures.getSize().y}, keys2);
+    _ship1->setColor(sf::Color{255, 200, 200, 255});
+    _ship2->setColor(sf::Color{200, 200, 255, 255});
     _ship1->getHud()->setName("Player 1");
     _ship2->getHud()->setName("Player 2");
     _ship1->getHud()->setPositions(0);
@@ -41,8 +43,10 @@ void Player::drawPlayer(sf::RenderWindow *w)
     _ship1->drawParticles(w);
     _ship2->drawParticles(w);
     glBegin(GL_LINES);
-    glLineWidth(5.0f);
+    glShadeModel(GL_SMOOTH);
+    glColor4ub(255, 100, 0, 200);
     glVertex2f(_ship1->getSprite().getPosition().x + 8, _ship1->getSprite().getPosition().y);
+    glColor4ub(0, 100, 255, 200);
     glVertex2f(_ship2->getSprite().getPosition().x + 8, _ship2->getSprite().getPosition().y);
     glEnd();
     w->draw(_ship1->getSprite());
@@ -59,8 +63,8 @@ void Player::drawPlayer(sf::RenderWindow *w)
 
 void Player::update()
 {
-    _ship1->update();
-    _ship2->update();
+    _ship1->update(sf::Color{255, 125, 0, 255}, sf::Color{255, 0, 0, 80});
+    _ship2->update(sf::Color{0, 125, 255, 255}, sf::Color{0, 0, 255, 80});
 }
 
 void Player::setShipMove(sf::Keyboard::Key key)

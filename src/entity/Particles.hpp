@@ -29,6 +29,7 @@ class Particle
         sf::Vector2f getPosition();
         sf::Vector2f getDirection();
         sf::Vector2f getRandomDirection();
+        void setColors(sf::Color startColor, sf::Color endColor);
 
     protected:
     private:

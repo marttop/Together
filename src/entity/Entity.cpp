@@ -67,6 +67,11 @@ void Entity::setPos(sf::Vector2f pos)
     _sprite->setPosition(_pos);
 }
 
+void Entity::setColor(sf::Color color)
+{
+    _sprite->setColor(color);
+}
+
 void Entity::setRotation(float angle)
 {
     _sprite->rotate(angle);

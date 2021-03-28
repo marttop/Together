@@ -32,6 +32,7 @@ class Entity {
         void drawParticles(sf::RenderWindow *w);
         bool isMouseOnSprite(sf::RenderWindow *w) const;
         bool isColliding(Entity *other);
+        void setColor(sf::Color color);
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;
