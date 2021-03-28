@@ -20,7 +20,10 @@ enum Scene {
     GAME_OVER,
 };
 
+class Player;
+
 extern Scene global_scene;
+extern string global_language;
 
 using namespace std;
 
