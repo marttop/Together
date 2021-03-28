@@ -8,6 +8,7 @@
 #ifndef GAME_HPP_
 #define GAME_HPP_
 
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -23,7 +24,10 @@
 #include "Prologue.hpp"
 #include "GameOver.hpp"
 #include "EndLost.hpp"
+#include "GameWon.hpp"
+#include "EndWin.hpp"
 
+class Game;
 using namespace std;
 
 class Game {
@@ -49,10 +53,12 @@ class Game {
         ChatBox box;
         Prologue _prologue;
         GameOver _gameOver;
+        GameWon _gameWon;
         ParticleSystem *_particles;
         bool _reset;
         EndLost _endLost;
         sf::Music _music;
+        EndWin _endWin;
 };
 
 #endif /* !GAME_HPP_ */

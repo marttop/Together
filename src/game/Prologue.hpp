@@ -11,6 +11,7 @@
 #include "EntityController.hpp"
 #include "ChatBox.hpp"
 
+
 class Prologue {
     public:
         Prologue();
@@ -19,6 +20,7 @@ class Prologue {
         void openPrologue(sf::RenderWindow *w);
         void displayPrologue(sf::RenderWindow *w);
         void enterEvent(sf::Event event);
+        void reset();
     protected:
     private:
         ChatBox _chat;

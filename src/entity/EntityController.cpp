@@ -55,7 +55,7 @@ void EntityController::updateAll()
         updateAsteroids();
         updateNyanCat();
     }
-    else if (global_scene == GAME_OVER) {
+    else if (global_scene == GAME_OVER || global_scene == GAME_WON) {
         pair<Ship *, Ship *> p = _player->getShips();
         p.first->setHpShip(100);
         p.second->setHpShip(100);
@@ -151,7 +151,7 @@ void EntityController::createRandomNyanCat()
 void EntityController::updatePlayer()
 {
     _player->update();
-    if (global_scene == GAME_OVER)
+    if (global_scene == GAME_OVER || global_scene == GAME_WON)
         return;
     int i = 0;
     pair<Ship *, Ship *> p = _player->getShips();
@@ -160,15 +160,19 @@ void EntityController::updatePlayer()
             _asteroid.erase(_asteroid.begin() + i);
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
-            if (p.first->getHpShip() <= 0)
+            if (p.first->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
         if (itr->isColliding((Entity *)p.second)) {
             _asteroid.erase(_asteroid.begin() + i);
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
-            if (p.second->getHpShip() <= 0)
+            if (p.second->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
         i++;
     }

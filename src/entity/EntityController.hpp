@@ -21,6 +21,7 @@ enum Scene {
     GAME,
     GAME_OVER,
     PROLOGUE,
+    GAME_WON,
 };
 
 class Player;
@@ -28,6 +29,8 @@ class NyanCat;
 
 extern Scene global_scene;
 extern string global_language;
+extern sf::Clock mainClock;
+extern bool gameOver;
 
 using namespace std;
 

@@ -2,24 +2,24 @@
 ** EPITECH PROJECT, 2021
 ** G-JAM-001-NCE-0-2-jam-marton.szuts
 ** File description:
-** EndLost
+** EndWin
 */
 
-#include "EndLost.hpp"
+#include "EndWin.hpp"
 
-EndLost::EndLost()
+EndWin::EndWin()
 {
-    _path.push_back(make_pair("res/endlost", "assets/yoda.png"));
+    _path.push_back(make_pair("res/endwin", "assets/yoda.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;
 }
 
-EndLost::~EndLost()
+EndWin::~EndWin()
 {
 }
 
-void EndLost::displayEndLost(sf::RenderWindow *w)
+void EndWin::displayEndWin(sf::RenderWindow *w)
 {
     if (_chat.isOpen()) {
         _chat.setDialog();
@@ -29,7 +29,7 @@ void EndLost::displayEndLost(sf::RenderWindow *w)
     }
 }
 
-void EndLost::reset()
+void EndWin::reset()
 {
     _index = -1;
     _isFinished = true;
@@ -37,7 +37,7 @@ void EndLost::reset()
 }
 
 
-void EndLost::enterEvent(sf::Event event)
+void EndWin::enterEvent(sf::Event event)
 {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
@@ -46,7 +46,7 @@ void EndLost::enterEvent(sf::Event event)
     }
 }
 
-void EndLost::openEndLost(sf::RenderWindow *w)
+void EndWin::openEndWin(sf::RenderWindow *w)
 {
     if (_isOpen == false && (_index < (int)_path.size() - 1)) {
         sf::IntRect r = w->getViewport(w->getView());
@@ -57,8 +57,9 @@ void EndLost::openEndLost(sf::RenderWindow *w)
         _chat.loadSprite(_path[_index].second);
         _chat.setPositions(r);
     }
-    displayEndLost(w);
+    displayEndWin(w);
     if (_isOpen == false && (_index == (int)_path.size() - 1)) {
         global_scene = GAME_OVER;
     }
 }
+
