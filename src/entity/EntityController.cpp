@@ -79,9 +79,13 @@ void EntityController::updatePlayer()
         pair<Ship *, Ship *> p = _player->getShips();
         if (itr->isColliding((Entity *)p.first)) {
             _asteroid.erase(_asteroid.begin() + i);
+            p.first->setHpShip(p.first->getHpShip() - 10);
+            p.first->getHud()->updateHp(p.first->getHpShip());
         }
         if (itr->isColliding((Entity *)p.second)) {
             _asteroid.erase(_asteroid.begin() + i);
+            p.second->setHpShip(p.second->getHpShip() - 10);
+            p.second->getHud()->updateHp(p.second->getHpShip());
         }
         i++;
     }
