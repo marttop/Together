@@ -29,18 +29,22 @@ EntityController::~EntityController()
 void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
-    for (auto a : _asteroid) {
-        a->drawParticles(w);
-        w->draw(a->getSprite());
+    if (global_scene == GAME) {
+        for (auto a : _asteroid) {
+            a->drawParticles(w);
+            w->draw(a->getSprite());
+        }
+        _player->drawPlayer(w);
     }
-    _player->drawPlayer(w);
 }
 
 void EntityController::updateAll()
 {
     _parallax->moveLayers();
-    updatePlayer();
-    updateAsteroids();
+    if (global_scene == GAME) {
+        updatePlayer();
+        updateAsteroids();
+    }
 }
 
 void EntityController::addAsteroid(sf::Vector2f pos)
@@ -81,11 +85,15 @@ void EntityController::updatePlayer()
             _asteroid.erase(_asteroid.begin() + i);
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
+            if (p.first->getHpShip() <= 0)
+                global_scene = GAME_OVER;
         }
         if (itr->isColliding((Entity *)p.second)) {
             _asteroid.erase(_asteroid.begin() + i);
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
+            if (p.second->getHpShip() <= 0)
+                global_scene = GAME_OVER;
         }
         i++;
     }

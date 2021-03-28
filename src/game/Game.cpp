@@ -7,7 +7,7 @@
 
 #include "Game.hpp"
 
-Scene global_scene = GAME;
+Scene global_scene = GAME_OVER;
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
@@ -52,6 +52,15 @@ void Game::handleEvents()
                 _menu.releaseButton(&_window);
             }
         }
+        if (global_scene == GAME_OVER) {
+            if (_event.type == sf::Event::KeyPressed) {
+                if (_event.key.code == sf::Keyboard::Escape)
+                    _window.close();
+                if (_event.key.code == sf::Keyboard::M) {
+                    global_scene = MENU;
+                }
+            }
+        }
     }
 }
 
@@ -77,6 +86,12 @@ void Game::run()
         } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
+        }
+        else if (global_scene == GAME_OVER) {
+            _controller->updateAll();
+            _controller->drawAll(&_window);
+            _gameOver.updateText();
+            _gameOver.drawEnd(&_window);
         }
         // box.setDialog();
         // box.draw(&_window);

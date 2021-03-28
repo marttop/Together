@@ -16,7 +16,8 @@
 
 enum Scene {
     MENU,
-    GAME
+    GAME,
+    GAME_OVER,
 };
 
 extern Scene global_scene;
