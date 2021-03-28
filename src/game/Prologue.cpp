@@ -10,9 +10,14 @@
 
 Prologue::Prologue()
 {
-    _path.push_back(make_pair("res/prologue", false));
-    _path.push_back(make_pair("res/prologue1", false));
-    _path.push_back(make_pair("res/prologue2", false));
+    _path.push_back(make_pair("res/prologue", "assets/yoda.png"));
+    _path.push_back(make_pair("res/prologue1", "assets/vador.png"));
+    _path.push_back(make_pair("res/prologue2", "assets/luke.png"));
+    _path.push_back(make_pair("res/prologue3", "assets/yoda.png"));
+    _path.push_back(make_pair("res/prologue4", "assets/luke.png"));
+    _path.push_back(make_pair("res/prologue5", "assets/vador.png"));
+    _path.push_back(make_pair("res/prologue6", "assets/luke.png"));
+    _path.push_back(make_pair("res/prologue7", "assets/vador.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;
@@ -48,7 +53,7 @@ void Prologue::openPrologue(sf::RenderWindow *w)
         _isOpen = true;
         _index++;
         _chat.readMessage(_path[_index].first);
-        _chat.loadSprite("assets/sheldon.png");
+        _chat.loadSprite(_path[_index].second);
     }
     displayPrologue(w);
 }

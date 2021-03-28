@@ -23,7 +23,7 @@ class Prologue {
     private:
         ChatBox _chat;
         bool _isFinished;
-        vector<pair<string, bool>> _path;
+        vector<pair<string, string>> _path;
         bool _isOpen;
         int _index;
 };
