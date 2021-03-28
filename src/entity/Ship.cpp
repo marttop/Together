@@ -118,7 +118,7 @@ void Ship::blink()
         }
         _clock.restart();
     }
-    if (this->_immunity.getElapsedTime().asSeconds() > 3)
+    if (this->_immunity.getElapsedTime().asSeconds() > 1)
         _isHit = false;
 }
 

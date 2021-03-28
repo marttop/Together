@@ -20,7 +20,7 @@ NyanCat::NyanCat(sf::Texture *texture, sf::Vector2f pos, float speed) : Enemy(te
     _touched = false;
     _soundBuffer.loadFromFile("audio/nyan.ogg");
     _sound.setBuffer(_soundBuffer);
-    _sound.setVolume(50.0);
+    _sound.setVolume(30.0);
     _sound.play();
 }
 
