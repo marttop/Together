@@ -36,6 +36,11 @@ void Player::drawPlayer(sf::RenderWindow *w)
 {
     _ship1->drawParticles(w);
     _ship2->drawParticles(w);
+    glBegin(GL_LINES);
+    glLineWidth(5.0f);
+    glVertex2f(_ship1->getSprite().getPosition().x + 8, _ship1->getSprite().getPosition().y);
+    glVertex2f(_ship2->getSprite().getPosition().x + 8, _ship2->getSprite().getPosition().y);
+    glEnd();
     w->draw(_ship1->getSprite());
     w->draw(_ship2->getSprite());
 }

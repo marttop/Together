@@ -9,6 +9,7 @@
 #define PLAYER_HPP_
 
 #include "Ship.hpp"
+#include "SFML/OpenGL.hpp"
 
 class Player {
     public:
