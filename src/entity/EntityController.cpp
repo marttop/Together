@@ -52,7 +52,7 @@ void EntityController::createRandomAsteroids()
 {
     bool isSpawned = false;
     if (_asteroidClock.getElapsedTime().asSeconds() > _randTime) {
-        for (int i = 0; !isSpawned; ) {
+        for (size_t i = 0; !isSpawned; ) {
             float x = rand() % 1920;
             i = 0;
             addAsteroid(sf::Vector2f{x, -300});

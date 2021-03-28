@@ -34,6 +34,8 @@ SRC				=	src/main.cpp \
 					src/entity/Layer.cpp \
 					src/entity/Particles.cpp \
 					src/entity/ShipHud.cpp \
+					src/entity/Bullet.cpp \
+					src/entity/Ammo.cpp \
 
 OBJ				=	$(SRC:.cpp=.o)
 

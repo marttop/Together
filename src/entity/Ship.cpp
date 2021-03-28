@@ -8,7 +8,7 @@
 #include "Ship.hpp"
 #include <iostream>
 
-Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Keyboard::Key *keys) : Entity(texture, pos)
+Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Keyboard::Key *keys, sf::IntRect bulletRect) : Entity(texture, pos)
 {
     _keys = keys;
     _sprite->setTextureRect(rectangle);
@@ -27,6 +27,10 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _hud = new ShipHud();
     _hud->setHp(100);
     _hp = 100;
+    _ammoTexture = new sf::Texture;
+    _ammoTexture->loadFromFile("assets/beams.png");
+    _ammos[0] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
+    _ammos[1] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
 }
 
 Ship::~Ship()
@@ -34,6 +38,9 @@ Ship::~Ship()
     delete _keys;
     delete _inputs;
     delete[] _particleSystem;
+    delete _ammoTexture;
+    delete _ammos[0];
+    delete _ammos[1];
 }
 
 void Ship::update(sf::Color startColor, sf::Color endColor)
@@ -57,6 +64,12 @@ void Ship::update(sf::Color startColor, sf::Color endColor)
     _pos = _sprite->getPosition();
     _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, startColor, endColor, 15, 1);
     _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, startColor, endColor, 15, 1);
+    if (_inputs[4] == true) {
+        _ammos[0]->shoot(sf::Vector2f{_pos.x, _pos.y});
+        _ammos[1]->shoot(sf::Vector2f{_pos.x + 25, _pos.y});
+    }
+    _ammos[0]->update();
+    _ammos[1]->update();
 }
 
 void Ship::moveShipRect()
@@ -68,7 +81,7 @@ void Ship::moveShipRect()
     _sprite->setTextureRect(_rect);
 }
 
-void Ship::setMove(sf::Keyboard::Key key)
+void Ship::setInputs(sf::Keyboard::Key key)
 {
     int i = 0;
     for (; i < 5; i++)
@@ -81,7 +94,7 @@ void Ship::setMove(sf::Keyboard::Key key)
     moveShipRect();
 }
 
-void Ship::unsetMove(sf::Keyboard::Key key)
+void Ship::unSetInputs(sf::Keyboard::Key key)
 {
     int i = 0;
     for (; i < 5; i++)
@@ -98,6 +111,12 @@ void Ship::drawParticles(sf::RenderWindow *w)
 {
     _particleSystem[0].drawParticles(w);
     _particleSystem[1].drawParticles(w);
+}
+
+void Ship::drawAmmos(sf::RenderWindow *w)
+{
+    _ammos[0]->drawAmmos(w);
+    _ammos[1]->drawAmmos(w);
 }
 
 void Ship::checkIfHit()
