@@ -113,7 +113,6 @@ void Game::run()
             _controller->updateAll();
             _controller->drawAll(&_window);
             if (global_nyan == 10 && !gameOver) {
-                global_nyan = 0;
                 global_scene = GAME_WON;
             }
         } else if (global_scene == MENU) {
@@ -132,6 +131,7 @@ void Game::run()
             _gameOver.updateText();
             _gameOver.drawEnd(&_window);
             if (!_reset) {
+                global_nyan = 0;
                 _controller->deleteAsteroids();
                 _controller->deleteNyanCat();
             }
@@ -143,7 +143,9 @@ void Game::run()
             _gameWon.updateText();
             _gameWon.drawEnd(&_window);
             if (!_reset) {
+                global_nyan = 0;
                 _controller->deleteAsteroids();
+                _controller->deleteNyanCat();
             }
             _endWin.openEndWin(&_window);
         }
