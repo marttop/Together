@@ -8,7 +8,7 @@
 #include "Game.hpp"
 
 Scene global_scene = MENU;
-string global_language = ".fr";
+string global_language = ".en";
 sf::Clock mainClock;
 bool gameOver = false;
 int global_nyan = 0;
