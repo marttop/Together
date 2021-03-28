@@ -18,6 +18,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     _controller = new EntityController(_player);
     _particles = new ParticleSystem();
 
+    glEnable(GL_MULTISAMPLE);
     glEnable(GL_POINT_SMOOTH);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

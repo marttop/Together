@@ -24,6 +24,7 @@ EntityController::~EntityController()
         delete iter;
     for (auto iter : _asteroid)
         delete iter;
+    delete _parallax;
 }
 
 void EntityController::drawAll(sf::RenderWindow *w) const
@@ -59,7 +60,7 @@ void EntityController::createRandomAsteroids()
         for (size_t i = 0; !isSpawned; ) {
             float x = rand() % 1920;
             i = 0;
-            addAsteroid(sf::Vector2f{x, -300});
+            addAsteroid(sf::Vector2f{x, -250});
             _asteroidClock.restart();
             _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
             for (auto itr : _asteroid) {
@@ -95,6 +96,8 @@ void EntityController::updatePlayer()
             if (p.second->getHpShip() <= 0)
                 global_scene = GAME_OVER;
         }
+        if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getHitboxSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
+            if (itr->getSpeed() > 0) itr->setSpeed(itr->getSpeed() * -1);
         i++;
     }
 }
@@ -112,7 +115,7 @@ void EntityController::updateAsteroids()
 void EntityController::destroyAsteroids()
 {
     for (size_t i = 0; i < _asteroid.size(); i++) {
-        if (_asteroid[i]->getPos().y >= 2000) {
+        if (_asteroid[i]->getPos().y >= 2000 || _asteroid[i]->getPos().y <= -500) {
             _asteroid.erase(_asteroid.begin() + i);
         }
     }

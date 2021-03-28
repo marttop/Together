@@ -15,3 +15,13 @@ Enemy::Enemy(sf::Texture *texture, sf::Vector2f pos, float speed) : Entity(textu
 Enemy::~Enemy()
 {
 }
+
+float Enemy::getSpeed()
+{
+    return (_speed);
+}
+
+void Enemy::setSpeed(float speed)
+{
+    _speed = speed;
+}

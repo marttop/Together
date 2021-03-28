@@ -39,6 +39,9 @@ class Ship : public Entity {
         float getHpShip() const;
         void setHpShip(float newHp);
         void drawAmmos(sf::RenderWindow *w);
+        float getSpeed();
+        void setSpeed(float speed);
+        void setCanShoot(bool shoot);
 
     protected:
     private:
@@ -55,6 +58,7 @@ class Ship : public Entity {
         ShipHud *_hud;
         Ammo *_ammos[2];
         float _hp;
+        bool _canShoot;
 };
 
 #endif /* !SHIP_HPP_ */

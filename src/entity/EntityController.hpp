@@ -52,6 +52,7 @@ class EntityController {
         vector <sf::Texture *> _textures;
         Player *_player;
         Parallax *_parallax;
+        Utils _utils;
         float _randTime;
 };
 
