@@ -59,6 +59,7 @@ void Game::handleEvents()
             }
             if (_event.type == sf::Event::MouseButtonReleased) {
                 _menu.releaseButton(&_window);
+                this->_controller->loadtxt();
             }
         }
         if (global_scene == GAME_OVER) {
@@ -69,6 +70,9 @@ void Game::handleEvents()
                 if (_event.key.code == sf::Keyboard::M) {
                     global_scene = MENU;
                     setReset(true);
+                    _player->setNameBool(false);
+                    _prologue.reset();
+                    _endLost.reset();
                 }
             }
         }
@@ -80,6 +84,9 @@ void Game::handleEvents()
                 if (_event.key.code == sf::Keyboard::M) {
                     global_scene = MENU;
                     setReset(true);
+                    _player->setNameBool(false);
+                    _prologue.reset();
+                    _endWin.reset();
                 }
             }
         }
@@ -105,7 +112,7 @@ void Game::run()
             _reset = false;
             _controller->updateAll();
             _controller->drawAll(&_window);
-            if (global_nyan == 10 && !gameOver) {
+            if (global_nyan == 1 && !gameOver) {
                 global_nyan = 0;
                 global_scene = GAME_WON;
             }

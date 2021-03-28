@@ -23,7 +23,7 @@ EntityController::EntityController(Player *player)
 
     _font.loadFromFile("fonts/retro_gaming.ttf");
     _nyanScore.setFont(_font);
-    _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
+    loadtxt();
     _nyanScore.setPosition(sf::Vector2f{800, 10});
 }
 
@@ -36,11 +36,23 @@ EntityController::~EntityController()
     delete _parallax;
 }
 
+string EntityController::EntityController::loadtxt()
+{
+    ifstream file;
+    string line;
+    file.open("res/nyan_returned" + global_language);
+    if (file.is_open()) {
+        getline(file, line);
+        _nyanScore.setString(line + to_string(global_nyan));
+        file.close();
+    }
+    return (line);
+}
+
 void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
     if (global_scene == GAME) {
-        w->draw(_nyanScore);
         for (auto a : _nyanCat) {
             a->drawParticles(w);
             w->draw(a->getSprite());
@@ -50,6 +62,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
             w->draw(a->getSprite());
         }
         _player->drawPlayer(w);
+        w->draw(_nyanScore);
     }
 }
 
@@ -60,7 +73,10 @@ void EntityController::updateAll()
     if (global_scene == GAME) {
         updateAsteroids();
         updateNyanCat();
-        _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
+        if (global_language == ".en")
+            _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
+        else if (global_language == ".fr")
+            _nyanScore.setString("Nyan cat retournes: " + to_string(global_nyan));
     }
     else if (global_scene == GAME_OVER || global_scene == GAME_WON) {
         pair<Ship *, Ship *> p = _player->getShips();
