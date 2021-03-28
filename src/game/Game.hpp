@@ -12,6 +12,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <vector>
 #include <math.h>
@@ -51,6 +52,7 @@ class Game {
         ParticleSystem *_particles;
         bool _reset;
         EndLost _endLost;
+        sf::Music _music;
 };
 
 #endif /* !GAME_HPP_ */

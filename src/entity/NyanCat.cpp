@@ -18,10 +18,15 @@ NyanCat::NyanCat(sf::Texture *texture, sf::Vector2f pos, float speed) : Enemy(te
     _sprite->setScale(sf::Vector2f{3.0, 3.0});
     _sprite->setRotation(90);
     _touched = false;
+    _soundBuffer.loadFromFile("audio/nyan.ogg");
+    _sound.setBuffer(_soundBuffer);
+    _sound.setVolume(15.0);
+    _sound.play();
 }
 
 NyanCat::~NyanCat()
 {
+    _sound.stop();
 }
 
 void NyanCat::moveNyanCat()

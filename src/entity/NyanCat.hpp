@@ -24,6 +24,8 @@ class NyanCat : public Enemy  {
         sf::IntRect _rect;
         sf::Vector2f _partPos;
         bool _touched;
+        sf::Sound _sound;
+        sf::SoundBuffer _soundBuffer;
 };
 
 #endif /* !NYANCAT_HPP_ */

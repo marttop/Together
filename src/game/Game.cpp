@@ -24,10 +24,15 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPointSize(7);
     _reset = false;
+
+    _music.openFromFile("audio/background.ogg");
+    _music.setLoop(true);
+    _music.play();
 }
 
 Game::~Game()
 {
+    _music.stop();
     delete _player;
     delete _controller;
 }
