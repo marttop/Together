@@ -22,8 +22,6 @@ Player::Player()
     _ship2->setColor(sf::Color{200, 200, 255, 255});
     _ship1->getHud()->setName(loadNames("res/player1_name"));
     _ship2->getHud()->setName(loadNames("res/player2_name"));
-    _ship1->getHud()->setPositions(0);
-    _ship2->getHud()->setPositions(1);
 }
 
 Player::~Player()
@@ -52,6 +50,7 @@ string Player::loadNames(string filepath)
 
 void Player::drawPlayer(sf::RenderWindow *w)
 {
+    sf::IntRect r = w->getViewport(w->getView());
     _ship1->drawParticles(w);
     _ship2->drawParticles(w);
     glBegin(GL_LINES);
@@ -64,6 +63,8 @@ void Player::drawPlayer(sf::RenderWindow *w)
     glEnd();
     _ship1->drawAmmos(w);
     _ship2->drawAmmos(w);
+    _ship1->getHud()->setPositions(0, r);
+    _ship2->getHud()->setPositions(1, r);
     w->draw(_ship1->getSprite());
     w->draw(_ship2->getSprite());
     w->draw(_ship1->getBox());
