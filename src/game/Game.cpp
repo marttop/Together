@@ -32,6 +32,7 @@ Game::~Game()
 void Game::handleEvents()
 {
     while (_window.pollEvent(_event)) {
+        _prologue.enterEvent(_event);
         if (_event.type == sf::Event::Closed)
             _window.close();
         if (global_scene == GAME) {
@@ -39,10 +40,6 @@ void Game::handleEvents()
                 _player->setShipMove(_event.key.code);
             if (_event.type == sf::Event::KeyReleased)
                 _player->unsetShipMove(_event.key.code);
-            if (_event.type == sf::Event::KeyPressed) {
-                if (_event.key.code == sf::Keyboard::Enter)
-                    box.addLine();
-            }
         }
         if (global_scene == MENU) {
             if (_event.type == sf::Event::MouseButtonPressed) {
@@ -67,7 +64,6 @@ void Game::display()
 
 void Game::run()
 {
-    // box.readMessage("res/dialog");
     while (_window.isOpen()) {
         handleEvents();
         clear();
@@ -77,9 +73,8 @@ void Game::run()
         } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
+            _prologue.openPrologue(&_window);
         }
-        // box.setDialog();
-        // box.draw(&_window);
         display();
     }
 }

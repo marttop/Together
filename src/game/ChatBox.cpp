@@ -29,8 +29,9 @@ ChatBox::ChatBox()
     _box.setFillColor(sf::Color::Black);
     textClock.restart();
     _lines = 0;
-    isOpen = false;
+    _isOpen = false;
     newline = false;
+    _isFinished = true;
     read = true;
     allLine = false;
 }
@@ -59,7 +60,12 @@ sf::RectangleShape ChatBox::getBox() const
 void ChatBox::readMessage(const std::string &msgPath)
 {
     _file.open(msgPath + lang, std::ios::in);
-    isOpen = true;
+    _isOpen = true;
+    _isFinished = false;
+    for (int i = 0; i < 5; i++) {
+        _msg[i].clear();
+    }
+    _lines = 0;
 }
 
 char ChatBox::readLetter()
@@ -71,8 +77,8 @@ char ChatBox::readLetter()
         _file.get(c);
         return c;
     }
+    _isFinished = true;
     _file.close();
-    isOpen = false;
     return 0;
 }
 
@@ -90,8 +96,12 @@ void ChatBox::addLine()
     newline = true;
     if (!allLine)
         allLine = true;
-    else
+    else if (allLine)
         allLine = false;
+    if (_isFinished) {
+        _isOpen = false;
+        allLine = false;
+    }
 }
 
 std::vector<sf::Text> ChatBox::getDialog() const
@@ -121,7 +131,7 @@ std::string ChatBox::readLine(std::string msg)
 void ChatBox::setDialog()
 {
     if (textClock.getElapsedTime().asSeconds() >= 0.05) {
-        if (isOpen) {
+        if (!_isFinished) {
             if (_lines < 5) {
                 if (_lines == 0)
                     _msg[0] = readLine(_msg[0]);
@@ -171,3 +181,7 @@ void ChatBox::setDialog()
     }
 }
 
+bool ChatBox::isOpen() const
+{
+    return (_isOpen);
+}
