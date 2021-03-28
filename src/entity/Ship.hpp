@@ -5,13 +5,6 @@
 ** Ship
 */
 
-/*
-** EPITECH PROJECT, 2021
-** G-JAM-001-NCE-0-2-jam-marton.szuts
-** File description:
-** Ship
-*/
-
 #ifndef SHIP_HPP_
 #define SHIP_HPP_
 

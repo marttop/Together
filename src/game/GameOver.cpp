@@ -44,11 +44,12 @@ void GameOver::updateText()
     float y = _gameOverText.getPosition().y;
     float y1 = _menuText.getPosition().y;
     float y2 = _quitText.getPosition().y;
-    if (_textClock.getElapsedTime().asSeconds() > 1) {
+    if (_textClock.getElapsedTime().asSeconds() > 0.0005) {
         if (y > 200) {
-            _gameOverText.setPosition(sf::Vector2f{310, y - 1});
-            _menuText.setPosition(sf::Vector2f{540, y1 - 1});
-            _quitText.setPosition(sf::Vector2f{600, y2 - 1});
+            _gameOverText.setPosition(sf::Vector2f{310, y - 3});
+            _menuText.setPosition(sf::Vector2f{540, y1 - 3});
+            _quitText.setPosition(sf::Vector2f{600, y2 - 3});
         }
+        _textClock.restart();
     }
 }

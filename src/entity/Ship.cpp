@@ -40,12 +40,12 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
 
 Ship::~Ship()
 {
-    delete _keys;
-    delete _inputs;
-    delete[] _particleSystem;
-    delete _ammoTexture;
-    delete _ammos[0];
-    delete _ammos[1];
+    //delete _keys;
+    //delete _inputs;
+    //delete[] _particleSystem;
+    //delete _ammoTexture;
+    //delete _ammos[0];
+    //delete _ammos[1];
 }
 
 void Ship::update(sf::Color startColor, sf::Color endColor)

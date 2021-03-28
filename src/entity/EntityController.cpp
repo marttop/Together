@@ -12,10 +12,14 @@ EntityController::EntityController(Player *player)
     srand(time(NULL));
     _textures.push_back(new sf::Texture);
     _textures[ASTEROID]->loadFromFile("assets/asteroid1.png");
+    _textures.push_back(new sf::Texture);
+    _textures[NYANCAT]->loadFromFile("assets/nyan.png");
     _player = player;
     _parallax = new Parallax;
     _asteroidClock.restart();
-    _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+    _nyanClock.restart();
+    _randTimeAsteroids = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+    _randTimeNyan = 5.0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 10.0));
 }
 
 EntityController::~EntityController()
@@ -31,6 +35,10 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
     if (global_scene == GAME) {
+        for (auto a : _nyanCat) {
+            a->drawParticles(w);
+            w->draw(a->getSprite());
+        }
         for (auto a : _asteroid) {
             a->drawParticles(w);
             w->draw(a->getSprite());
@@ -45,8 +53,9 @@ void EntityController::updateAll()
     updatePlayer();
     if (global_scene == GAME) {
         updateAsteroids();
+        updateNyanCat();
     }
-    else if (global_scene == GAME_OVER) {
+    else if (global_scene == GAME_OVER || global_scene == GAME_WON) {
         pair<Ship *, Ship *> p = _player->getShips();
         p.first->setHpShip(100);
         p.second->setHpShip(100);
@@ -58,6 +67,11 @@ void EntityController::updateAll()
 void EntityController::addAsteroid(sf::Vector2f pos)
 {
     _asteroid.push_back(new Asteroid(_textures[ASTEROID], pos, 2 + (rand() % 6)));
+}
+
+void EntityController::addNyan(sf::Vector2f pos)
+{
+    _nyanCat.push_back(new NyanCat(_textures[NYANCAT], pos, 6 + (rand() % 4)));
 }
 
 void EntityController::checkShooting()
@@ -104,13 +118,13 @@ void EntityController::checkShooting()
 void EntityController::createRandomAsteroids()
 {
     bool isSpawned = false;
-    if (_asteroidClock.getElapsedTime().asSeconds() > _randTime) {
+    if (_asteroidClock.getElapsedTime().asSeconds() > _randTimeAsteroids) {
         for (size_t i = 0; !isSpawned; ) {
             float x = rand() % 1920;
             i = 0;
             addAsteroid(sf::Vector2f{x, -250});
             _asteroidClock.restart();
-            _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+            _randTimeAsteroids = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
             for (auto itr : _asteroid) {
                 if (itr != _asteroid.back() && !itr->isColliding(_asteroid.back())) {
                     i++;
@@ -124,16 +138,26 @@ void EntityController::createRandomAsteroids()
     }
 }
 
+void EntityController::createRandomNyanCat()
+{
+    if (_nyanClock.getElapsedTime().asSeconds() > _randTimeNyan) {
+        float x = rand() % 1920;
+        addNyan(sf::Vector2f{x, -250});
+        _nyanClock.restart();
+        _randTimeNyan = 5.0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 10.0));
+    }
+}
+
 void EntityController::updatePlayer()
 {
     _player->update();
-    if (global_scene == GAME_OVER)
+    if (global_scene == GAME_OVER || global_scene == GAME_WON)
         return;
     int i = 0;
+    pair<Ship *, Ship *> p = _player->getShips();
     for (auto itr : _asteroid) {
 
         sf::Vector2f scale = itr->getscale();
-        pair<Ship *, Ship *> p = _player->getShips();
 
         if (itr->isColliding((Entity *)p.first) && !p.first->isHit()) {
             if (scale.x <= 0.15f) {
@@ -144,8 +168,10 @@ void EntityController::updatePlayer()
             p.first->hitMyAss();
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
-            if (p.first->getHpShip() <= 0)
+            if (p.first->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
 
         if (itr->isColliding((Entity *)p.second) && !p.second->isHit()) {
@@ -157,13 +183,19 @@ void EntityController::updatePlayer()
             p.second->hitMyAss();
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
-            if (p.second->getHpShip() <= 0)
+            if (p.second->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
-
-        if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getHitboxSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
-            if (itr->getSpeed() > 0) itr->setSpeed(itr->getSpeed() * -1);
         i++;
+    }
+    for (auto itr : _nyanCat) {
+        if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
+            if (itr->getSpeed() > 0){
+                itr->setSpeed(itr->getSpeed() * -1);
+                itr->setRotation(180);
+            }
     }
     checkShooting();
 }
@@ -178,11 +210,29 @@ void EntityController::updateAsteroids()
     destroyAsteroids();
 }
 
+void EntityController::updateNyanCat()
+{
+    createRandomNyanCat();
+    for (auto itr : _nyanCat)
+        itr->moveNyanCat();
+    destroyNyanCat();
+}
+
 void EntityController::destroyAsteroids()
 {
     for (size_t i = 0; i < _asteroid.size(); i++) {
         if (_asteroid[i]->getPos().y >= 2000 || _asteroid[i]->getPos().y <= -500) {
             _asteroid.erase(_asteroid.begin() + i);
+        }
+    }
+}
+
+
+void EntityController::destroyNyanCat()
+{
+    for (size_t i = 0; i < _nyanCat.size(); i++) {
+        if (_nyanCat[i]->getPos().y >= 2000 || _nyanCat[i]->getPos().y <= -1000) {
+            _nyanCat.erase(_nyanCat.begin() + i);
         }
     }
 }
@@ -193,4 +243,12 @@ void EntityController::deleteAsteroids()
         _asteroid.pop_back();
     }
     _asteroid.clear();
+}
+
+void EntityController::deleteNyanCat()
+{
+    for (size_t i = 0; i < _nyanCat.size(); i++) {
+        _nyanCat.pop_back();
+    }
+    _nyanCat.clear();
 }

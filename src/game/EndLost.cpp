@@ -29,6 +29,14 @@ void EndLost::displayEndLost(sf::RenderWindow *w)
     }
 }
 
+void EndLost::reset()
+{
+    _index = -1;
+    _isFinished = true;
+    _isOpen = false;
+}
+
+
 void EndLost::enterEvent(sf::Event event)
 {
     if (event.type == sf::Event::KeyPressed) {

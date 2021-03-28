@@ -19,6 +19,7 @@ class EndLost {
         void openEndLost(sf::RenderWindow *w);
         void displayEndLost(sf::RenderWindow *w);
         void enterEvent(sf::Event event);
+        void reset();
     protected:
     private:
         ChatBox _chat;
