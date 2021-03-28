@@ -57,3 +57,8 @@ void Player::unsetShipMove(sf::Keyboard::Key key)
     _ship1->unsetMove(key);
     _ship2->unsetMove(key);
 }
+
+pair<Ship *, Ship *> Player::getShips() const
+{
+    return (make_pair(_ship1, _ship2));
+}

@@ -31,7 +31,7 @@ class Entity {
         void setRotation(float angle);
         void drawParticles(sf::RenderWindow *w);
         bool isMouseOnSprite(sf::RenderWindow *w) const;
-        bool isColliding(Entity &other);
+        bool isColliding(Entity *other);
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;

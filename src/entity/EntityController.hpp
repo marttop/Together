@@ -39,6 +39,7 @@ class EntityController {
         void createRandomAsteroids();
         void destroyAsteroids();
         void updateAsteroids();
+        void updatePlayer();
 
     protected:
     private:

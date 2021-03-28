@@ -39,7 +39,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 void EntityController::updateAll()
 {
     _parallax->moveLayers();
-    _player->update();
+    updatePlayer();
     updateAsteroids();
 }
 
@@ -55,6 +55,22 @@ void EntityController::createRandomAsteroids()
         addAsteroid(sf::Vector2f{x, -300});
         _asteroidClock.restart();
         _randTime = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
+    }
+}
+
+void EntityController::updatePlayer()
+{
+    _player->update();
+    int i = 0;
+    for (auto itr : _asteroid) {
+        pair<Ship *, Ship *> p = _player->getShips();
+        if (itr->isColliding((Entity *)p.first)) {
+            _asteroid.erase(_asteroid.begin() + i);
+        }
+        if (itr->isColliding((Entity *)p.second)) {
+            _asteroid.erase(_asteroid.begin() + i);
+        }
+        i++;
     }
 }
 
