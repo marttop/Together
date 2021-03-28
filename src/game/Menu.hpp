@@ -22,11 +22,13 @@ class Menu {
         void menuAnimation();
         void clickButton(sf::RenderWindow *w);
         void releaseButton(sf::RenderWindow *w);
+        void updateMenuLang();
     protected:
     private:
         sf::Font _font;
         sf::Texture _bckgrTexture;
         sf::Texture _btnTexture;
+        sf::Texture _smallBtnTexture;
         Layer *_background;
         sf::Text _title;
         vector<Button *> _buttons;

@@ -19,10 +19,13 @@ Menu::Menu()
     _title.setPosition(sf::Vector2f{10, 10});
     _title.setFillColor(sf::Color{255, 255, 255, 0});
     _btnTexture.loadFromFile("assets/button.png");
-    _buttons.push_back(new Button(&_btnTexture, sf::Vector2f{50, 75}, "res/btn_start", ".en"));
-    _buttons.push_back(new Button(&_btnTexture, sf::Vector2f{50, 130}, "res/btn_exit", ".en"));
-    _buttons[0]->setFont(_font);
-    _buttons[1]->setFont(_font);
+    _smallBtnTexture.loadFromFile("assets/small_button.png");
+    _buttons.push_back(new Button(&_btnTexture, sf::Vector2f{50, 75}, "res/btn_start", global_language));
+    _buttons.push_back(new Button(&_btnTexture, sf::Vector2f{50, 130}, "res/btn_exit", global_language));
+    _buttons.push_back(new Button(&_smallBtnTexture, sf::Vector2f{1750, 10}, "res/btn_fr", ""));
+    _buttons.push_back(new Button(&_smallBtnTexture, sf::Vector2f{1825, 10}, "res/btn_en", ""));
+    for (auto itr : _buttons)
+        itr->setFont(_font);
 }
 
 void Menu::menuAnimation()
@@ -74,8 +77,23 @@ void Menu::releaseButton(sf::RenderWindow *w)
                     global_scene = GAME;
                 if (itr == _buttons.at(1))
                     w->close();
+                if (itr == _buttons.at(2) && global_language != ".fr") {
+                    global_language = ".fr";
+                    updateMenuLang();
+                }
+                if (itr == _buttons.at(3) && global_language != ".en") {
+                    global_language = ".en";
+                    updateMenuLang();
+                }
             }
         }
+    }
+}
+
+void Menu::updateMenuLang()
+{
+    for (auto itr : _buttons) {
+        itr->setLang(global_language);
     }
 }
 

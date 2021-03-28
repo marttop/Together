@@ -19,6 +19,7 @@
 #include "Utils.hpp"
 #include "Menu.hpp"
 #include "ChatBox.hpp"
+#include "GameOver.hpp"
 
 using namespace std;
 
@@ -41,8 +42,8 @@ class Game {
         Player *_player;
         Menu _menu;
         Scene _scene;
-        string _language;
         ChatBox box;
+        GameOver _gameOver;
 };
 
 #endif /* !GAME_HPP_ */
