@@ -19,7 +19,7 @@ Parallax::Parallax()
     addLayer(1.0, NEBULA_AQUA_PINK, false);
     addLayer(1.0, NEBULA_BLUE, true);
     addLayer(1.0, NEBULA_RED, false);
-    addLayer(2.0, BIG_STARS1, false);
+    addLayer(2.0, BIG_STARS1, true);
     addLayer(2.0, SMALL_STARS1, true);
     addLayer(3.0, BIG_STARS2, true);
     addLayer(3.0, SMALL_STARS2, true);

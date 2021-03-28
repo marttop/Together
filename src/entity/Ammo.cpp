@@ -33,13 +33,22 @@ void Ammo::shoot(sf::Vector2f pos)
 
 void Ammo::update()
 {
+    int index = 0;
     if (_direction == false) {
-        for (auto i : _ammos)
+        for (auto i : _ammos) {
             i->setPos(sf::Vector2f(i->getPos().x, i->getPos().y + _speed * _updateClock.getElapsedTime().asSeconds()));
+            if (i->getPos().y >= 2000)
+                _ammos.erase(_ammos.begin() + index);
+            index++;
+        }
     }
     else {
-        for (auto i : _ammos)
+        for (auto i : _ammos) {
             i->setPos(sf::Vector2f(i->getPos().x, i->getPos().y - _speed));
+            if (i->getPos().y <= -1000)
+                _ammos.erase(_ammos.begin() + index);
+            index++;
+        }
     }
 }
 

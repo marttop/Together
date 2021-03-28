@@ -14,6 +14,8 @@ class Enemy : public Entity {
     public:
         Enemy(sf::Texture *texture, sf::Vector2f pos, float speed = 0);
         ~Enemy();
+        float getSpeed();
+        void setSpeed(float speed);
 
     protected:
         float _speed;

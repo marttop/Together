@@ -30,6 +30,7 @@ class Game {
         ~Game();
 
         void run();
+        void setReset(bool r);
 
     private:
         void handleEvents();
@@ -46,6 +47,8 @@ class Game {
         ChatBox box;
         Prologue _prologue;
         GameOver _gameOver;
+        ParticleSystem *_particles;
+        bool _reset;
 };
 
 #endif /* !GAME_HPP_ */

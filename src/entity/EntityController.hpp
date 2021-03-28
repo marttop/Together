@@ -14,6 +14,7 @@
 #include <memory>
 #include <ctime>
 
+
 enum Scene {
     MENU,
     GAME,
@@ -45,6 +46,7 @@ class EntityController {
         void updateAsteroids();
         void updatePlayer();
         void checkShooting();
+        void deleteAsteroids();
 
     protected:
     private:
@@ -53,6 +55,7 @@ class EntityController {
         vector <sf::Texture *> _textures;
         Player *_player;
         Parallax *_parallax;
+        Utils _utils;
         float _randTime;
 };
 

@@ -15,17 +15,17 @@ GameOver::GameOver()
     _gameOverText.setFillColor(sf::Color::White);
     _gameOverText.setCharacterSize(200);
     _gameOverText.setString("GAME OVER");
-    _gameOverText.setPosition(sf::Vector2f{310, 1100});
+    _gameOverText.setPosition(sf::Vector2f{310, 1080});
     _menuText.setFont(_font);
     _menuText.setFillColor(sf::Color::White);
     _menuText.setCharacterSize(40);
     _menuText.setString("Press 'M' to go back to the menu");
-    _menuText.setPosition(sf::Vector2f{540, 1450});
+    _menuText.setPosition(sf::Vector2f{540, 1430});
     _quitText.setFont(_font);
     _quitText.setFillColor(sf::Color::White);
     _quitText.setCharacterSize(40);
     _quitText.setString("Press 'ESC' to quit the game");
-    _quitText.setPosition(sf::Vector2f{600, 1550});
+    _quitText.setPosition(sf::Vector2f{600, 1530});
 }
 
 GameOver::~GameOver()
