@@ -14,9 +14,6 @@ ChatBox::ChatBox()
     tmp.setFont(_font);
     tmp.setFillColor(sf::Color::White);
     tmp.setCharacterSize(20);
-    _texture.loadFromFile("assets/sheldon.png");
-    _sprite.setTexture(_texture);
-    _sprite.setPosition(sf::Vector2f{40, 890});
     for (size_t i = 0; i < 5; i++) {
         _dialog.push_back(tmp);
         _dialog[i].setPosition(sf::Vector2f{200, 890 + ((float)i * 30)});
@@ -30,7 +27,6 @@ ChatBox::ChatBox()
     _box.setOutlineThickness(3.0);
     _box.setOutlineColor(sf::Color::White);
     _box.setFillColor(sf::Color::Black);
-    lang = ".en";
     textClock.restart();
     _lines = 0;
     isOpen = false;
@@ -41,6 +37,18 @@ ChatBox::ChatBox()
 
 ChatBox::~ChatBox()
 {
+}
+
+void ChatBox::setLanguage(std::string language)
+{
+    lang = language;
+}
+
+void ChatBox::loadSprite(const std::string &texturePath)
+{
+    _texture.loadFromFile(texturePath);
+    _sprite.setTexture(_texture);
+    _sprite.setPosition(sf::Vector2f{40, 890});
 }
 
 sf::RectangleShape ChatBox::getBox() const

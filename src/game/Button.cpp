@@ -44,14 +44,13 @@ void Button::setColor(sf::Color color)
 {
     _alpha = color.a;
     this->_sprite->setColor(color);
-    this->_btnText.setFillColor(color);
+    this->_btnText.setFillColor(sf::Color{255, 255, 255, color.a});
 }
 
 void Button::btnHover(sf::RenderWindow *w)
 {
-    sf::Vector2i pos = sf::Mouse::getPosition(*w);
-    if (_sprite->getGlobalBounds().contains(sf::Vector2f(pos))) {
-        this->_sprite->setColor(sf::Color(255, 0, 0, _alpha));
+    if (isMouseOnSprite(w)) {
+        this->_sprite->setColor(sf::Color(3, 211, 252, _alpha));
     } else {
         this->_sprite->setColor(sf::Color(255, 255, 255, _alpha));
     }

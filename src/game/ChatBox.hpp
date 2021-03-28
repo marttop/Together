@@ -28,6 +28,8 @@ class ChatBox {
         std::vector<sf::Text> getDialog() const;
         sf::RectangleShape getBox() const;
         void setDialog();
+        void setLanguage(std::string language);
+        void loadSprite(const std::string &texturePath);
     private:
         sf::Clock textClock;
         sf::Font _font;

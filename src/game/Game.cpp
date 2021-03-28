@@ -7,9 +7,10 @@
 
 #include "Game.hpp"
 
+Scene global_scene = MENU;
+
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
-    _scene = GAME;
     _window.create(sf::VideoMode(width, height), winTitle);
     _window.setFramerateLimit(60);
     _player = new Player;
@@ -31,15 +32,25 @@ Game::~Game()
 void Game::handleEvents()
 {
     while (_window.pollEvent(_event)) {
-        if (_event.type == sf::Event::Closed)
-            _window.close();
-        if (_event.type == sf::Event::KeyPressed)
-            _player->setShipMove(_event.key.code);
-        if (_event.type == sf::Event::KeyReleased)
-            _player->unsetShipMove(_event.key.code);
-        if (_event.type == sf::Event::KeyPressed) {
-            if (_event.key.code == sf::Keyboard::Enter)
-                box.addLine();
+        if (global_scene == GAME) {
+            if (_event.type == sf::Event::Closed)
+                _window.close();
+            if (_event.type == sf::Event::KeyPressed)
+                _player->setShipMove(_event.key.code);
+            if (_event.type == sf::Event::KeyReleased)
+                _player->unsetShipMove(_event.key.code);
+            if (_event.type == sf::Event::KeyPressed) {
+                if (_event.key.code == sf::Keyboard::Enter)
+                    box.addLine();
+            }
+        }
+        if (global_scene == MENU) {
+            if (_event.type == sf::Event::MouseButtonPressed) {
+                _menu.clickButton(&_window);
+            }
+            if (_event.type == sf::Event::MouseButtonReleased) {
+                _menu.releaseButton(&_window);
+            }
         }
     }
 }
@@ -60,10 +71,10 @@ void Game::run()
     while (_window.isOpen()) {
         handleEvents();
         clear();
-        if (_scene == GAME) {
+        if (global_scene == GAME) {
             _controller->updateAll();
             _controller->drawAll(&_window);
-        } else if (_scene == MENU) {
+        } else if (global_scene == MENU) {
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
         }

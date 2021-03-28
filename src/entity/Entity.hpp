@@ -30,6 +30,7 @@ class Entity {
         void restartClock();
         void setRotation(float angle);
         void drawParticles(sf::RenderWindow *w);
+        bool isMouseOnSprite(sf::RenderWindow *w) const;
     protected:
         sf::Texture *_texture;
         sf::Sprite *_sprite;

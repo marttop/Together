@@ -36,6 +36,8 @@ void Menu::menuAnimation()
             this->_clock.restart();
 
             for (auto itr : _buttons) {
+                color = itr->getColor();
+                color.a += 5;
                 itr->setColor(color);
             }
         }
@@ -48,7 +50,32 @@ void Menu::displayMenu(sf::RenderWindow *w)
     w->draw(_title);
     for (auto itr : _buttons) {
         itr->drawButton(w);
-        itr->btnHover(w);
+        if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            itr->btnHover(w);
+    }
+}
+
+void Menu::clickButton(sf::RenderWindow *w)
+{
+    if (this->_background->getColor().a >= 255) {
+        for (auto itr : _buttons) {
+            if (itr->isMouseOnSprite(w))
+                itr->setColor(sf::Color{150, 150, 150, 255});
+        }
+    }
+}
+
+void Menu::releaseButton(sf::RenderWindow *w)
+{
+    if (this->_background->getColor().a >= 255) {
+        for (auto itr : _buttons) {
+            if (itr->isMouseOnSprite(w)) {
+                if (itr == _buttons.at(0))
+                    global_scene = GAME;
+                if (itr == _buttons.at(1))
+                    w->close();
+            }
+        }
     }
 }
 
