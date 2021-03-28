@@ -9,7 +9,7 @@
 
 EndLost::EndLost()
 {
-    _path.push_back(make_pair("res/endlost", "assets/yoda.png"));
+    _path.push_back(make_pair("res/endlost", "assets/damien.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;
