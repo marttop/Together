@@ -29,6 +29,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     _reset = false;
     _music.openFromFile("audio/background.ogg");
     _music.setLoop(true);
+    _music.setVolume(80.0);
     _music.play();
     mainClock.restart();
 }
