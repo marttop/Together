@@ -73,6 +73,7 @@ void Game::handleEvents()
             }
         }
         if (global_scene == GAME_WON) {
+            _endWin.enterEvent(_event);
             if (_event.type == sf::Event::KeyPressed) {
                 if (_event.key.code == sf::Keyboard::Escape)
                     _window.close();

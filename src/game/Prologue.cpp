@@ -9,14 +9,14 @@
 
 Prologue::Prologue()
 {
-    _path.push_back(make_pair("res/prologue", "assets/yoda.png"));
-    _path.push_back(make_pair("res/prologue1", "assets/vador.png"));
-    _path.push_back(make_pair("res/prologue2", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue3", "assets/yoda.png"));
-    _path.push_back(make_pair("res/prologue4", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue5", "assets/vador.png"));
-    _path.push_back(make_pair("res/prologue6", "assets/luke.png"));
-    _path.push_back(make_pair("res/prologue7", "assets/vador.png"));
+    _path.push_back(make_pair("res/prologue", "assets/damien.png"));
+    _path.push_back(make_pair("res/prologue1", "assets/stargate.png"));
+    _path.push_back(make_pair("res/prologue2", "assets/startrek.png"));
+    _path.push_back(make_pair("res/prologue3", "assets/damien.png"));
+    _path.push_back(make_pair("res/prologue4", "assets/startrek.png"));
+    _path.push_back(make_pair("res/prologue5", "assets/stargate.png"));
+    _path.push_back(make_pair("res/prologue6", "assets/startrek.png"));
+    _path.push_back(make_pair("res/prologue7", "assets/stargate.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;

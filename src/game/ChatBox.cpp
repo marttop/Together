@@ -48,10 +48,10 @@ void ChatBox::setLanguage(std::string language)
 void ChatBox::setPositions(sf::IntRect r)
 {
     for (size_t i = 0; i < 5; i++) {
-        _dialog[i].setPosition(sf::Vector2f{(float)r.left + 200, (float)r.height - 180 + ((float)i * 30)});
+        _dialog[i].setPosition(sf::Vector2f{(float)r.left + 200, (float)r.height - 200 + ((float)i * 30)});
     }
-    _box.setPosition(sf::Vector2f{(float)r.left + 10, (float)r.height - 200});
-    _sprite.setPosition(sf::Vector2f{(float)r.left + 40, (float)r.height - 180});
+    _box.setPosition(sf::Vector2f{(float)r.left + 10, (float)r.height - 220});
+    _sprite.setPosition(sf::Vector2f{(float)r.left + 40, (float)r.height - 200});
 }
 
 void ChatBox::loadSprite(const std::string &texturePath)
