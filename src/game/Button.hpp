@@ -24,11 +24,15 @@ class Button : public Entity {
         sf::Color getColor() const;
         void setColor(sf::Color color);
         void btnHover(sf::RenderWindow *w);
+        void loadTxt();
+        void setLang(string &lang);
 
     protected:
     private:
         sf::Uint8 _alpha;
         sf::Text _btnText;
+        string _lang;
+        string _path;
 };
 
 #endif /* !BUTTON_HPP_ */

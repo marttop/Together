@@ -41,7 +41,6 @@ class Game {
         Player *_player;
         Menu _menu;
         Scene _scene;
-        string _language;
         ChatBox box;
 };
 

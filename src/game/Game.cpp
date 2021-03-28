@@ -7,7 +7,8 @@
 
 #include "Game.hpp"
 
-Scene global_scene = GAME;
+Scene global_scene = MENU;
+string global_language = ".fr";
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
@@ -20,7 +21,6 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPointSize(7);
-    _language = ".en";
 }
 
 Game::~Game()
