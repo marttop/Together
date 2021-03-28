@@ -9,7 +9,11 @@
 
 EndWin::EndWin()
 {
-    _path.push_back(make_pair("res/endwin", "assets/yoda.png"));
+    _path.push_back(make_pair("res/endwin", "assets/startrek.png"));
+    _path.push_back(make_pair("res/endwin1", "assets/stargate.png"));
+    _path.push_back(make_pair("res/endwin2", "assets/startrek.png"));
+    _path.push_back(make_pair("res/endwin3", "assets/stargate.png"));
+    _path.push_back(make_pair("res/endwin4", "assets/damien.png"));
     _index = -1;
     _isFinished = true;
     _isOpen = false;
@@ -59,7 +63,7 @@ void EndWin::openEndWin(sf::RenderWindow *w)
     }
     displayEndWin(w);
     if (_isOpen == false && (_index == (int)_path.size() - 1)) {
-        global_scene = GAME_OVER;
+        global_scene = GAME_WON;
     }
 }
 

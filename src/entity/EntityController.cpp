@@ -53,7 +53,6 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
     if (global_scene == GAME) {
-        w->draw(_nyanScore);
         for (auto a : _nyanCat) {
             a->drawParticles(w);
             w->draw(a->getSprite());
@@ -63,6 +62,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
             w->draw(a->getSprite());
         }
         _player->drawPlayer(w);
+        w->draw(_nyanScore);
     }
 }
 
