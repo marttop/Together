@@ -16,6 +16,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     _window.setFramerateLimit(60);
     _player = new Player;
     _controller = new EntityController(_player);
+    _particles = new ParticleSystem();
 
     glEnable(GL_POINT_SMOOTH);
     glEnable(GL_BLEND);

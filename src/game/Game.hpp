@@ -44,6 +44,7 @@ class Game {
         Scene _scene;
         ChatBox box;
         GameOver _gameOver;
+        ParticleSystem *_particles;
 };
 
 #endif /* !GAME_HPP_ */
