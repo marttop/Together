@@ -24,7 +24,7 @@ EntityController::EntityController(Player *player)
     _font.loadFromFile("fonts/retro_gaming.ttf");
     _nyanScore.setFont(_font);
     _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
-    _nyanScore.setPosition(sf::Vector2f{800, 10});
+    _nyanScore.setPosition(sf::Vector2f{740, 10});
 }
 
 EntityController::~EntityController()
