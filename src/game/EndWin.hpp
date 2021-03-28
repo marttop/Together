@@ -2,22 +2,22 @@
 ** EPITECH PROJECT, 2021
 ** G-JAM-001-NCE-0-2-jam-marton.szuts
 ** File description:
-** EndLost
+** EndWin
 */
 
-#ifndef ENDLOST_HPP_
-#define ENDLOST_HPP_
+#ifndef ENDWIN_HPP_
+#define ENDWIN_HPP_
 
 #include "EntityController.hpp"
 #include "ChatBox.hpp"
 
-class EndLost {
+class EndWin {
     public:
-        EndLost();
-        ~EndLost();
+        EndWin();
+        ~EndWin();
 
-        void openEndLost(sf::RenderWindow *w);
-        void displayEndLost(sf::RenderWindow *w);
+        void openEndWin(sf::RenderWindow *w);
+        void displayEndWin(sf::RenderWindow *w);
         void enterEvent(sf::Event event);
         void reset();
     protected:
@@ -29,4 +29,4 @@ class EndLost {
         int _index;
 };
 
-#endif /* !ENDLOST_HPP_ */
+#endif /* !ENDWIN_HPP_ */

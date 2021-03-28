@@ -26,7 +26,9 @@ SRC				=	src/main.cpp \
 					src/game/ChatBox.cpp \
 					src/game/Prologue.cpp \
 					src/game/EndLost.cpp \
+					src/game/EndWin.cpp \
 					src/game/GameOver.cpp \
+					src/game/GameWon.cpp \
 					src/entity/Entity.cpp \
 					src/entity/EntityController.cpp \
 					src/entity/Enemy.cpp \

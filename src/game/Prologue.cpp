@@ -26,6 +26,13 @@ Prologue::~Prologue()
 {
 }
 
+void Prologue::reset()
+{
+    _index = -1;
+    _isFinished = true;
+    _isOpen = false;
+}
+
 void Prologue::displayPrologue(sf::RenderWindow *w)
 {
     if (_chat.isOpen()) {
@@ -59,5 +66,6 @@ void Prologue::openPrologue(sf::RenderWindow *w)
     displayPrologue(w);
     if (_isOpen == false && (_index == (int)_path.size() - 1)) {
         global_scene = GAME;
+        mainClock.restart();
     }
 }

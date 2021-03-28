@@ -46,7 +46,7 @@ void EntityController::updateAll()
     if (global_scene == GAME) {
         updateAsteroids();
     }
-    else if (global_scene == GAME_OVER) {
+    else if (global_scene == GAME_OVER || global_scene == GAME_WON) {
         pair<Ship *, Ship *> p = _player->getShips();
         p.first->setHpShip(100);
         p.second->setHpShip(100);
@@ -127,7 +127,7 @@ void EntityController::createRandomAsteroids()
 void EntityController::updatePlayer()
 {
     _player->update();
-    if (global_scene == GAME_OVER)
+    if (global_scene == GAME_OVER || global_scene == GAME_WON)
         return;
     int i = 0;
     for (auto itr : _asteroid) {
@@ -136,15 +136,19 @@ void EntityController::updatePlayer()
             _asteroid.erase(_asteroid.begin() + i);
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
-            if (p.first->getHpShip() <= 0)
+            if (p.first->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
         if (itr->isColliding((Entity *)p.second)) {
             _asteroid.erase(_asteroid.begin() + i);
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
-            if (p.second->getHpShip() <= 0)
+            if (p.second->getHpShip() <= 0) {
+                gameOver = true;
                 global_scene = GAME_OVER;
+            }
         }
         if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getHitboxSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
             if (itr->getSpeed() > 0) itr->setSpeed(itr->getSpeed() * -1);
