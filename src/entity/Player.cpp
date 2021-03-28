@@ -87,6 +87,8 @@ void Player::drawPlayer(sf::RenderWindow *w)
     w->draw(_ship2->getName());
     w->draw(_ship2->getBar());
     w->draw(_ship2->getHpRect());
+    _ship1->blink();
+    _ship2->blink();
     if (_name == false) {
         _ship1->getHud()->setName(loadNames("res/player1_name"));
         _ship2->getHud()->setName(loadNames("res/player2_name"));

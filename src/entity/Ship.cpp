@@ -27,12 +27,15 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _hud = new ShipHud();
     _hud->setHp(100);
     _hp = 100;
+    _clock.restart();
+    _immunity.restart();
     _ammoTexture = new sf::Texture;
     _ammoTexture->loadFromFile("assets/beams.png");
     _ammos[0] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
     _ammos[1] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
     _canShoot = true;
     _savePos = pos;
+    _blink = true;
 }
 
 Ship::~Ship()
@@ -87,6 +90,36 @@ void Ship::moveShipRect()
     else if (_inputs[3] == true) _rect.left = _rectOffset * 2;
     else _rect.left = _rectOffset;
     _sprite->setTextureRect(_rect);
+}
+
+void Ship::restartClock()
+{
+    this->_clock.restart();
+}
+
+void Ship::blink()
+{
+    sf::Color color = _sprite->getColor();
+    if (_clock.getElapsedTime().asSeconds() > 0.01 && _isHit) {
+        if (color.a > 50 && _blink == true) {
+            color.a -= 10;
+            this->_sprite->setColor(color);
+            return;
+        } else {
+            _blink = false;
+        }
+        if (color.a < 255 && _blink == false) {
+            color.a += 10;
+            this->_sprite->setColor(color);
+            return;
+        }
+        else {
+            _blink = true;
+        }
+        _clock.restart();
+    }
+    if (this->_immunity.getElapsedTime().asSeconds() > 3)
+        _isHit = false;
 }
 
 void Ship::setInputs(sf::Keyboard::Key key)
@@ -176,12 +209,22 @@ void Ship::setHpShip(float newHp)
 
 Ammo &Ship::getAmmos(int i)
 {
-    // if (i > 1) return (nullptr);
     return (*_ammos[i]);
 }
 float Ship::getSpeed()
 {
     return (_speed);
+}
+
+void Ship::hitMyAss()
+{
+    _isHit = true;
+    _immunity.restart();
+}
+
+bool Ship::isHit() const
+{
+    return (_isHit);
 }
 
 void Ship::setSpeed(float speed)
