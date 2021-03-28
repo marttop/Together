@@ -25,6 +25,7 @@ SRC				=	src/main.cpp \
 					src/game/Button.cpp \
 					src/game/ChatBox.cpp \
 					src/game/Prologue.cpp \
+					src/game/GameOver.cpp \
 					src/entity/Entity.cpp \
 					src/entity/EntityController.cpp \
 					src/entity/Enemy.cpp \
@@ -35,6 +36,9 @@ SRC				=	src/main.cpp \
 					src/entity/Layer.cpp \
 					src/entity/Particles.cpp \
 					src/entity/ShipHud.cpp \
+					src/entity/Bullet.cpp \
+					src/entity/Ammo.cpp \
+
 
 OBJ				=	$(SRC:.cpp=.o)
 

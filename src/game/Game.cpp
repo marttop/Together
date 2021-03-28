@@ -49,6 +49,15 @@ void Game::handleEvents()
                 _menu.releaseButton(&_window);
             }
         }
+        if (global_scene == GAME_OVER) {
+            if (_event.type == sf::Event::KeyPressed) {
+                if (_event.key.code == sf::Keyboard::Escape)
+                    _window.close();
+                if (_event.key.code == sf::Keyboard::M) {
+                    global_scene = MENU;
+                }
+            }
+        }
     }
 }
 
@@ -74,6 +83,12 @@ void Game::run()
             _menu.displayMenu(&_window);
             _menu.menuAnimation();
             _prologue.openPrologue(&_window);
+        }
+        else if (global_scene == GAME_OVER) {
+            _controller->updateAll();
+            _controller->drawAll(&_window);
+            _gameOver.updateText();
+            _gameOver.drawEnd(&_window);
         }
         display();
     }

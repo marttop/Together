@@ -17,7 +17,7 @@ class ShipHud {
         ShipHud();
         ~ShipHud();
         void setName(std::string name);
-        void setPositions(int player);
+        void setPositions(int player, sf::IntRect r);
         sf::Text getName() const;
         sf::RectangleShape getBox() const;
         sf::RectangleShape getBar() const;
