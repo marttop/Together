@@ -84,3 +84,17 @@ void Asteroid::rotateAsteroid()
         _rotationClock.restart();
     }
 }
+
+void Asteroid::reduceScale()
+{
+    sf::Vector2f scale = _sprite->getScale();
+    _sprite->setScale(sf::Vector2f{scale.x - 0.1f, scale.y - 0.1f});
+    scale = _hitboxSprite->getScale();
+    if (scale.x > 0.1f)
+        _hitboxSprite->setScale(sf::Vector2f{scale.x - 0.1f, scale.y - 0.1f});
+}
+
+sf::Vector2f Asteroid::getscale() const
+{
+    return (_hitboxSprite->getScale());
+}

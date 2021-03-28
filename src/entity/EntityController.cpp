@@ -69,9 +69,16 @@ void EntityController::checkShooting()
         vector<Bullet *> *c = &this->_player->getShip(1).getAmmos(0).getLasers();
         vector<Bullet *> *d = &this->_player->getShip(1).getAmmos(1).getLasers();
 
+        sf::Vector2f scale = itr->getscale();
+
         for (size_t i = 0; i < a->size(); i++) {
             if (itr->isColliding(a->at(i)) || itr->isColliding(b->at(i))) {
-                _asteroid.erase(_asteroid.begin() + index);
+                if (scale.x <= 0.15f) {
+                    _asteroid.erase(_asteroid.begin() + index);
+                }
+                else {
+                    itr->reduceScale();
+                }
                 a->erase(a->begin() + i);
                 b->erase(b->begin() + i);
                 break;
@@ -79,7 +86,12 @@ void EntityController::checkShooting()
         }
         for (size_t i = 0; i < c->size(); i++) {
             if (itr->isColliding(c->at(i)) || itr->isColliding(d->at(i))) {
-                _asteroid.erase(_asteroid.begin() + index);
+                if (scale.x <= 0.15f) {
+                    _asteroid.erase(_asteroid.begin() + index);
+                }
+                else {
+                    itr->reduceScale();
+                }
                 c->erase(c->begin() + i);
                 d->erase(d->begin() + i);
                 break;
