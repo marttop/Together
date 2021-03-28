@@ -156,8 +156,16 @@ void EntityController::updatePlayer()
     int i = 0;
     pair<Ship *, Ship *> p = _player->getShips();
     for (auto itr : _asteroid) {
-        if (itr->isColliding((Entity *)p.first)) {
-            _asteroid.erase(_asteroid.begin() + i);
+
+        sf::Vector2f scale = itr->getscale();
+
+        if (itr->isColliding((Entity *)p.first) && !p.first->isHit()) {
+            if (scale.x <= 0.15f) {
+                _asteroid.erase(_asteroid.begin() + i);
+            }
+            else
+                itr->reduceScale();
+            p.first->hitMyAss();
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
             if (p.first->getHpShip() <= 0) {
@@ -165,8 +173,14 @@ void EntityController::updatePlayer()
                 global_scene = GAME_OVER;
             }
         }
-        if (itr->isColliding((Entity *)p.second)) {
-            _asteroid.erase(_asteroid.begin() + i);
+
+        if (itr->isColliding((Entity *)p.second) && !p.second->isHit()) {
+            if (scale.x <= 0.15f) {
+                _asteroid.erase(_asteroid.begin() + i);
+            }
+            else
+                itr->reduceScale();
+            p.second->hitMyAss();
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
             if (p.second->getHpShip() <= 0) {
@@ -178,7 +192,7 @@ void EntityController::updatePlayer()
     }
     for (auto itr : _nyanCat) {
         if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
-            if (itr->getSpeed() > 0){ 
+            if (itr->getSpeed() > 0){
                 itr->setSpeed(itr->getSpeed() * -1);
                 itr->setRotation(180);
             }

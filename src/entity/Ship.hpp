@@ -40,6 +40,10 @@ class Ship : public Entity {
         float getSpeed();
         void setSpeed(float speed);
         void setCanShoot(bool shoot);
+        void hitMyAss();
+        bool isHit() const;
+        void blink();
+        void restartClock();
 
     protected:
     private:
@@ -58,6 +62,10 @@ class Ship : public Entity {
         float _hp;
         bool _canShoot;
 
+
+        bool _blink;
+        sf::Clock _clock;
+        sf::Clock _immunity;
         sf::Vector2f _savePos;
 };
 
