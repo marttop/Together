@@ -45,6 +45,7 @@ class EntityController {
         void destroyAsteroids();
         void updateAsteroids();
         void updatePlayer();
+        void checkShooting();
         void deleteAsteroids();
 
     protected:
@@ -54,6 +55,7 @@ class EntityController {
         vector <sf::Texture *> _textures;
         Player *_player;
         Parallax *_parallax;
+        Utils _utils;
         float _randTime;
 };
 

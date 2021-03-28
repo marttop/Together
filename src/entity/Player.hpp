@@ -25,12 +25,21 @@ class Player {
         void unsetShipMove(sf::Keyboard::Key key);
         string loadNames(string filepath);
         pair<Ship *, Ship *> getShips() const;
+        Ship &getShip(int i) const;
+        void setNameBool(bool name);
+        sf::FloatRect getLineRect();
+        sf::Vector2f getLineVectors(bool select);
+        bool getLink();
 
     protected:
     private:
         sf::Texture _shipTextures;
         Ship *_ship1;
         Ship *_ship2;
+        bool _name;
+        sf::VertexArray _line;
+        Utils _utils;
+        bool _link;
 };
 
 #endif /* !PLAYER_HPP_ */

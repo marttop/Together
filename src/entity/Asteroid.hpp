@@ -18,12 +18,15 @@ class Asteroid : public Enemy {
         void moveAsteroid();
         void rotateAsteroid();
         void scaleAsteroid();
+        sf::Sprite &getHitboxSprite();
+        bool isColliding(Entity *other);
     protected:
     private:
         int _direction;
         sf::Clock _rotationClock;
         float _rotationSpeed;
         int _trail;
+        sf::Sprite *_hitboxSprite;
 };
 
 #endif /* !ASTEROID_HPP_ */

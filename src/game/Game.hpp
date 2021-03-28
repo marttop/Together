@@ -47,6 +47,7 @@ class Game {
         ChatBox box;
         Prologue _prologue;
         GameOver _gameOver;
+        ParticleSystem *_particles;
         bool _reset;
 };
 

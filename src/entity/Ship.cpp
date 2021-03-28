@@ -31,6 +31,7 @@ Ship::Ship(sf::Texture *texture, sf::Vector2f pos, sf::IntRect rectangle, sf::Ke
     _ammoTexture->loadFromFile("assets/beams.png");
     _ammos[0] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
     _ammos[1] = new Ammo(_ammoTexture, 1, 20, 0.2, bulletRect);
+    _canShoot = true;
     _savePos = pos;
 }
 
@@ -65,7 +66,7 @@ void Ship::update(sf::Color startColor, sf::Color endColor)
     _pos = _sprite->getPosition();
     _particleSystem[0].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x + 25, _pos.y + 50}, sf::Vector2f{_pos.x + 30, _pos.y + 10}, startColor, endColor, 15, 1);
     _particleSystem[1].update(sf::Vector2f{0, 0}, sf::Vector2f{_pos.x - 10, _pos.y + 50}, sf::Vector2f{_pos.x - 15, _pos.y + 10}, startColor, endColor, 15, 1);
-    if (_inputs[4] == true) {
+    if (_inputs[4] == true && _canShoot == true) {
         _ammos[0]->shoot(sf::Vector2f{_pos.x, _pos.y});
         _ammos[1]->shoot(sf::Vector2f{_pos.x + 25, _pos.y});
     }
@@ -99,6 +100,11 @@ void Ship::setInputs(sf::Keyboard::Key key)
     if (i == 3) _inputs[3] = true;
     if (i == 4) _inputs[4] = true;
     moveShipRect();
+}
+
+void Ship::setCanShoot(bool shoot)
+{
+    _canShoot = shoot;
 }
 
 void Ship::unSetInputs(sf::Keyboard::Key key)
@@ -166,4 +172,19 @@ float Ship::getHpShip() const
 void Ship::setHpShip(float newHp)
 {
     _hp = newHp;
+}
+
+Ammo &Ship::getAmmos(int i)
+{
+    // if (i > 1) return (nullptr);
+    return (*_ammos[i]);
+}
+float Ship::getSpeed()
+{
+    return (_speed);
+}
+
+void Ship::setSpeed(float speed)
+{
+    _speed = speed;
 }
