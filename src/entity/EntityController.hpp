@@ -30,6 +30,7 @@ class NyanCat;
 extern Scene global_scene;
 extern string global_language;
 extern sf::Clock mainClock;
+extern int global_nyan;
 extern bool gameOver;
 
 using namespace std;
@@ -72,6 +73,11 @@ class EntityController {
         Utils _utils;
         float _randTimeAsteroids;
         float _randTimeNyan;
+
+
+        sf::Font _font;
+        sf::Text _nyanScore;
+        sf::Text _timer;
 };
 
 #endif /* !ENTITYCONTROLLER_HPP_ */
