@@ -20,6 +20,11 @@ EntityController::EntityController(Player *player)
     _nyanClock.restart();
     _randTimeAsteroids = 0.4 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 2.0));
     _randTimeNyan = 5.0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 10.0));
+
+    _font.loadFromFile("fonts/retro_gaming.ttf");
+    _nyanScore.setFont(_font);
+    _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
+    _nyanScore.setPosition(sf::Vector2f{800, 10});
 }
 
 EntityController::~EntityController()
@@ -35,6 +40,7 @@ void EntityController::drawAll(sf::RenderWindow *w) const
 {
     _parallax->drawLayers(w);
     if (global_scene == GAME) {
+        w->draw(_nyanScore);
         for (auto a : _nyanCat) {
             a->drawParticles(w);
             w->draw(a->getSprite());
@@ -54,6 +60,7 @@ void EntityController::updateAll()
     if (global_scene == GAME) {
         updateAsteroids();
         updateNyanCat();
+        _nyanScore.setString("Nyan cat returned: " + to_string(global_nyan));
     }
     else if (global_scene == GAME_OVER || global_scene == GAME_WON) {
         pair<Ship *, Ship *> p = _player->getShips();
@@ -156,8 +163,16 @@ void EntityController::updatePlayer()
     int i = 0;
     pair<Ship *, Ship *> p = _player->getShips();
     for (auto itr : _asteroid) {
-        if (itr->isColliding((Entity *)p.first)) {
-            _asteroid.erase(_asteroid.begin() + i);
+
+        sf::Vector2f scale = itr->getscale();
+
+        if (itr->isColliding((Entity *)p.first) && !p.first->isHit()) {
+            if (scale.x <= 0.15f) {
+                _asteroid.erase(_asteroid.begin() + i);
+            }
+            else
+                itr->reduceScale();
+            p.first->hitMyAss();
             p.first->setHpShip(p.first->getHpShip() - 10);
             p.first->getHud()->updateHp(p.first->getHpShip());
             if (p.first->getHpShip() <= 0) {
@@ -165,8 +180,14 @@ void EntityController::updatePlayer()
                 global_scene = GAME_OVER;
             }
         }
-        if (itr->isColliding((Entity *)p.second)) {
-            _asteroid.erase(_asteroid.begin() + i);
+
+        if (itr->isColliding((Entity *)p.second) && !p.second->isHit()) {
+            if (scale.x <= 0.15f) {
+                _asteroid.erase(_asteroid.begin() + i);
+            }
+            else
+                itr->reduceScale();
+            p.second->hitMyAss();
             p.second->setHpShip(p.second->getHpShip() - 10);
             p.second->getHud()->updateHp(p.second->getHpShip());
             if (p.second->getHpShip() <= 0) {
@@ -178,7 +199,7 @@ void EntityController::updatePlayer()
     }
     for (auto itr : _nyanCat) {
         if (_player->getLink() == true && _utils.segmentIntersectsRectangle(itr->getSprite().getGlobalBounds(), _player->getLineVectors(true), _player->getLineVectors(false)))
-            if (itr->getSpeed() > 0){ 
+            if (itr->getSpeed() > 0){
                 itr->setSpeed(itr->getSpeed() * -1);
                 itr->setRotation(180);
             }
@@ -217,6 +238,8 @@ void EntityController::destroyAsteroids()
 void EntityController::destroyNyanCat()
 {
     for (size_t i = 0; i < _nyanCat.size(); i++) {
+        if (_nyanCat[i]->getPos().y <= -1000)
+            global_nyan += 1;
         if (_nyanCat[i]->getPos().y >= 2000 || _nyanCat[i]->getPos().y <= -1000) {
             _nyanCat.erase(_nyanCat.begin() + i);
         }

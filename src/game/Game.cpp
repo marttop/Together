@@ -11,6 +11,7 @@ Scene global_scene = MENU;
 string global_language = ".fr";
 sf::Clock mainClock;
 bool gameOver = false;
+int global_nyan = 0;
 
 Game::Game(const std::string &winTitle, size_t width, size_t height)
 {
@@ -28,6 +29,7 @@ Game::Game(const std::string &winTitle, size_t width, size_t height)
     _reset = false;
     _music.openFromFile("audio/background.ogg");
     _music.setLoop(true);
+    _music.setVolume(80.0);
     _music.play();
     mainClock.restart();
 }
@@ -103,7 +105,8 @@ void Game::run()
             _reset = false;
             _controller->updateAll();
             _controller->drawAll(&_window);
-            if (mainClock.getElapsedTime().asSeconds() >= 60 && !gameOver) {
+            if (global_nyan == 10 && !gameOver) {
+                global_nyan = 0;
                 global_scene = GAME_WON;
             }
         } else if (global_scene == MENU) {
