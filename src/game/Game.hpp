@@ -21,6 +21,7 @@
 #include "ChatBox.hpp"
 #include "Prologue.hpp"
 #include "GameOver.hpp"
+#include "EndLost.hpp"
 
 using namespace std;
 
@@ -49,6 +50,7 @@ class Game {
         GameOver _gameOver;
         ParticleSystem *_particles;
         bool _reset;
+        EndLost _endLost;
 };
 
 #endif /* !GAME_HPP_ */

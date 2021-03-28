@@ -100,6 +100,7 @@ void Game::run()
             if (!_reset) {
                 _controller->deleteAsteroids();
             }
+            _endLost.openEndLost(&_window);
         }
         display();
     }
